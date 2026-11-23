@@ -285,11 +285,11 @@ def _black_theme(fig, axes):
         ax.yaxis.label.set_color("#8A8D93")
         ax.title.set_color("#FFFFFF")
         for s in ax.spines.values():
-            s.set_edgecolor("rgba(138, 141, 147, 0.25)")
+            s.set_edgecolor("#2A2D33")
             s.set_linewidth(1.0)
         ax.grid(True, color="#8A8D93", alpha=0.15, linestyle="--", linewidth=0.7)
 
-LEG = dict(facecolor="#111215", edgecolor="rgba(138, 141, 147, 0.25)", labelcolor="#FFFFFF")
+LEG = dict(facecolor="#111215", edgecolor="#2A2D33", labelcolor="#FFFFFF")
 
 @st.cache_data
 def _galaxies():
