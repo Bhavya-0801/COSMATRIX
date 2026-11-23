@@ -55,21 +55,63 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# ANIMATED GALAXY & CELESTIAL OBSERVATORY UI
-# Pure CSS 60FPS Parallax Starfields, Nebula Gas Vortex & Glass HUD Panels
+# REALISTIC COSMIC GALAXY ARTWORK & ANIMATED CELESTIAL OBSERVATORY UI
+# High-Resolution Astrophotography Core, 60FPS Stellar Flare Pulse & Glass HUD
 # ─────────────────────────────────────────────────────────────────────────────
-st.markdown("""
+import base64
+
+# Robust multi-path resolution for the high-res realistic galaxy artwork
+_this_dir = Path(__file__).resolve().parent
+_bg_candidates = [
+    _this_dir / "assets" / "cosmic_background.jpg",
+    _this_dir / "Cosmatrix" / "assets" / "cosmic_background.jpg",
+    Path.cwd() / "Cosmatrix" / "assets" / "cosmic_background.jpg",
+    Path.cwd() / "assets" / "cosmic_background.jpg",
+    Path("assets/cosmic_background.jpg"),
+]
+
+bg_b64 = ""
+for _p in _bg_candidates:
+    if _p.exists():
+        try:
+            with open(_p, "rb") as _f:
+                bg_b64 = base64.b64encode(_f.read()).decode("utf-8")
+            if bg_b64:
+                break
+        except Exception:
+            continue
+
+if bg_b64:
+    bg_css_code = f"""
+    background-color: #030712 !important;
+    background-image: 
+        linear-gradient(180deg, rgba(3, 7, 18, 0.60) 0%, rgba(3, 7, 18, 0.78) 100%),
+        url("data:image/jpeg;base64,{bg_b64}") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    """
+else:
+    bg_css_code = """
+    background-color: #030712 !important;
+    background-image: 
+        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.10) 0%, transparent 50%) !important;
+    background-attachment: fixed !important;
+    """
+
+st.markdown(f"""
 <style>
 /* ───────────────────────── GALAXY BACKGROUND SYSTEM ───────────────────────── */
-.stApp {
-    background-color: #05070B !important;
+.stApp {{
+    {bg_css_code}
     color: #F1F5F9 !important;
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
-}
+}}
 
-/* Fixed Multi-Layer Cosmic Canvas */
-.stApp::before {
+/* Fixed Multi-Layer Cosmic Atmosphere: Radiant Stellar Flare Pulse */
+.stApp::before {{
     content: "";
     position: fixed;
     top: 0;
@@ -79,143 +121,141 @@ st.markdown("""
     pointer-events: none;
     z-index: 0;
     background: 
-        radial-gradient(circle at 75% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 20% 75%, rgba(139, 92, 246, 0.14) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 60%),
-        radial-gradient(circle at 85% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
-    animation: cosmicNebulaDrift 24s ease-in-out infinite alternate;
-}
+        radial-gradient(circle at 68% 28%, rgba(251, 191, 36, 0.18) 0%, rgba(245, 158, 11, 0.08) 30%, transparent 60%),
+        radial-gradient(circle at 25% 75%, rgba(56, 189, 248, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.07) 0%, transparent 65%);
+    animation: stellarCorePulse 18s ease-in-out infinite alternate;
+}}
 
-.stApp::after {
+/* Gravitational Streamlines & Drifting Micro-Stardust */
+.stApp::after {{
     content: "";
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: -40%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
     pointer-events: none;
     z-index: 0;
     background-image: 
-        radial-gradient(1px 1px at 40px 60px, rgba(255, 255, 255, 0.95), rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 140px 190px, rgba(248, 250, 252, 0.85), rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 280px 80px, rgba(56, 189, 248, 0.9), rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 320px 300px, rgba(167, 139, 250, 0.8), rgba(0,0,0,0)),
-        radial-gradient(1.2px 1.2px at 480px 220px, rgba(255, 255, 255, 0.9), rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 620px 140px, rgba(255, 255, 255, 0.75), rgba(0,0,0,0)),
-        radial-gradient(1.8px 1.8px at 740px 380px, rgba(56, 189, 248, 0.85), rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 890px 260px, rgba(255, 255, 255, 0.7), rgba(0,0,0,0)),
-        radial-gradient(2.2px 2.2px at 980px 120px, rgba(248, 250, 252, 0.9), rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 1120px 420px, rgba(167, 139, 250, 0.75), rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 1260px 180px, rgba(255, 255, 255, 0.8), rgba(0,0,0,0));
+        radial-gradient(1px 1px at 45px 65px, rgba(255, 255, 255, 0.95), transparent),
+        radial-gradient(1.5px 1.5px at 155px 210px, rgba(251, 191, 36, 0.9), transparent),
+        radial-gradient(1px 1px at 295px 85px, rgba(56, 189, 248, 0.85), transparent),
+        radial-gradient(2px 2px at 440px 330px, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1.2px 1.2px at 590px 175px, rgba(167, 139, 250, 0.8), transparent),
+        radial-gradient(1.8px 1.8px at 760px 410px, rgba(251, 191, 36, 0.85), transparent),
+        radial-gradient(1px 1px at 910px 200px, rgba(56, 189, 248, 0.8), transparent),
+        radial-gradient(2px 2px at 1080px 310px, rgba(255, 255, 255, 0.95), transparent);
     background-repeat: repeat;
-    background-size: 600px 600px;
-    animation: galaxyVortexRotate 120s linear infinite;
-    opacity: 0.85;
-}
+    background-size: 700px 700px;
+    animation: cosmicStreamDrift 100s linear infinite;
+    opacity: 0.70;
+}}
 
-/* Cosmic Nebula & Vortex Keyframes */
-@keyframes cosmicNebulaDrift {
-    0% {
-        transform: scale(1) translate(0, 0);
-        opacity: 0.8;
-    }
-    50% {
-        transform: scale(1.08) translate(-15px, 20px);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.03) translate(20px, -15px);
-        opacity: 0.85;
-    }
-}
+/* Animation Keyframes */
+@keyframes stellarCorePulse {{
+    0% {{
+        opacity: 0.65;
+        transform: scale(1) translateY(0);
+    }}
+    50% {{
+        opacity: 1.0;
+        transform: scale(1.06) translateY(-10px);
+    }}
+    100% {{
+        opacity: 0.70;
+        transform: scale(1.02) translateY(6px);
+    }}
+}}
 
-@keyframes galaxyVortexRotate {
-    0% {
+@keyframes cosmicStreamDrift {{
+    0% {{
         transform: rotate(0deg);
-    }
-    100% {
+    }}
+    100% {{
         transform: rotate(360deg);
-    }
-}
+    }}
+}}
 
-/* Ensure app content stays in foreground above space layers */
-.main, header, [data-testid="stSidebar"], .stApp > div {
+/* Ensure foreground content stays above space layers */
+.main, header, [data-testid="stSidebar"], .stApp > div {{
     position: relative;
     z-index: 1;
-}
+}}
 
 /* ───────────────────────── MODERN OBSERVATORY HUD UI ───────────────────────── */
 
 /* Sidebar: Deep Obsidian Glass */
-[data-testid="stSidebar"] {
-    background: rgba(5, 7, 11, 0.85) !important;
+[data-testid="stSidebar"] {{
+    background: rgba(4, 7, 15, 0.88) !important;
     backdrop-filter: blur(24px) saturate(180%) !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
+    border-right: 1px solid rgba(251, 191, 36, 0.12) !important;
+}}
 
 [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
-[data-testid="stSidebar"] label {
+[data-testid="stSidebar"] label {{
     color: #94A3B8 !important;
     font-size: 0.88rem !important;
     font-weight: 500;
-}
+}}
 
 /* Typography Hierarchy */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {{
     color: #F8FAFC !important;
     font-weight: 700 !important;
     letter-spacing: -0.025em !important;
-}
+}}
 
-p, span, div {
+p, span, div {{
     color: #94A3B8;
-}
+}}
 
 /* Metric Cards: Translucent Observatory HUD Tiles */
-[data-testid="metric-container"] {
-    background: rgba(12, 16, 26, 0.7) !important;
+[data-testid="metric-container"] {{
+    background: rgba(6, 11, 24, 0.74) !important;
     backdrop-filter: blur(20px) saturate(180%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-top: 1px solid rgba(56, 189, 248, 0.4) !important;
+    border: 1px solid rgba(251, 191, 36, 0.16) !important;
+    border-top: 1px solid rgba(56, 189, 248, 0.45) !important;
     border-radius: 12px !important;
     padding: 16px 20px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
+}}
 
-[data-testid="metric-container"]:hover {
+[data-testid="metric-container"]:hover {{
     transform: translateY(-3px);
-    background: rgba(16, 22, 36, 0.8) !important;
-    border-color: rgba(56, 189, 248, 0.6) !important;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15) !important;
-}
+    background: rgba(10, 18, 36, 0.85) !important;
+    border-color: rgba(251, 191, 36, 0.35) !important;
+    border-top-color: #38BDF8 !important;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(56, 189, 248, 0.18) !important;
+}}
 
-[data-testid="metric-container"] [data-testid="stMetricLabel"] {
-    color: #64748B !important;
+[data-testid="metric-container"] [data-testid="stMetricLabel"] {{
+    color: #94A3B8 !important;
     font-size: 0.78rem !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.06em !important;
-}
+}}
 
-[data-testid="metric-container"] [data-testid="stMetricValue"] {
+[data-testid="metric-container"] [data-testid="stMetricValue"] {{
     color: #F8FAFC !important;
     font-size: 1.7rem !important;
     font-weight: 700 !important;
     letter-spacing: -0.02em !important;
-}
+}}
 
 /* Navigation Segment: Sleek Observatory Dock */
-.stTabs [data-baseweb="tab-list"] {
-    background: rgba(10, 14, 23, 0.75) !important;
+.stTabs [data-baseweb="tab-list"] {{
+    background: rgba(6, 11, 24, 0.80) !important;
     backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(251, 191, 36, 0.15) !important;
     border-radius: 12px !important;
     padding: 5px !important;
     gap: 4px !important;
-}
+}}
 
-.stTabs [data-baseweb="tab"] {
+.stTabs [data-baseweb="tab"] {{
     color: #94A3B8 !important;
     background-color: transparent !important;
     border: none !important;
@@ -224,23 +264,23 @@ p, span, div {
     font-size: 0.88rem !important;
     font-weight: 500 !important;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
+}}
 
-.stTabs [data-baseweb="tab"]:hover {
+.stTabs [data-baseweb="tab"]:hover {{
     color: #F8FAFC !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-}
+    background: rgba(255, 255, 255, 0.06) !important;
+}}
 
-.stTabs [aria-selected="true"] {
-    background: rgba(30, 41, 59, 0.7) !important;
+.stTabs [aria-selected="true"] {{
+    background: rgba(14, 28, 54, 0.85) !important;
     color: #38BDF8 !important;
     font-weight: 600 !important;
-    border: 1px solid rgba(56, 189, 248, 0.3) !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.15) !important;
-}
+    border: 1px solid rgba(56, 189, 248, 0.35) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 12px rgba(56, 189, 248, 0.18) !important;
+}}
 
 /* Interactive Buttons: Glowing Starlight Pills */
-.stButton > button {
+.stButton > button {{
     background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
     color: #FFFFFF !important;
     border: 1px solid rgba(56, 189, 248, 0.5) !important;
@@ -248,69 +288,69 @@ p, span, div {
     padding: 8px 24px !important;
     font-weight: 600 !important;
     letter-spacing: -0.01em !important;
-    box-shadow: 0 4px 16px rgba(2, 132, 199, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35) !important;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
+}}
 
-.stButton > button:hover {
+.stButton > button:hover {{
     background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%) !important;
     border-color: #38BDF8 !important;
     color: #FFFFFF !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(56, 189, 248, 0.5) !important;
-}
+    box-shadow: 0 6px 24px rgba(56, 189, 248, 0.55) !important;
+}}
 
-.stButton > button:active {
+.stButton > button:active {{
     transform: translateY(0);
-}
+}}
 
 /* Dropdowns & Selectboxes */
-div[data-baseweb="select"] > div {
-    background: rgba(12, 16, 26, 0.75) !important;
+div[data-baseweb="select"] > div {{
+    background: rgba(6, 11, 24, 0.82) !important;
     backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(251, 191, 36, 0.16) !important;
     border-radius: 10px !important;
     color: #F8FAFC !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-}
+}}
 
 div[data-baseweb="select"] > div:hover,
-div[data-baseweb="select"] > div:focus-within {
+div[data-baseweb="select"] > div:focus-within {{
     border-color: #38BDF8 !important;
-    box-shadow: 0 0 14px rgba(56, 189, 248, 0.25) !important;
-}
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.28) !important;
+}}
 
 /* Data Table Surface */
-div[data-testid="stDataFrame"] {
-    background: rgba(12, 16, 26, 0.6) !important;
+div[data-testid="stDataFrame"] {{
+    background: rgba(6, 11, 24, 0.72) !important;
     backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(251, 191, 36, 0.15) !important;
     border-radius: 12px !important;
-}
+}}
 
 /* Dividers */
-hr {
+hr {{
     border: 0 !important;
     height: 1px !important;
-    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.25), transparent) !important;
+    background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), rgba(56, 189, 248, 0.3), transparent) !important;
     margin: 24px 0 !important;
-}
+}}
 
 /* Alerts / Expanders */
-.stAlert {
-    background: rgba(12, 16, 26, 0.7) !important;
+.stAlert {{
+    background: rgba(6, 11, 24, 0.8) !important;
     backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(251, 191, 36, 0.18) !important;
     color: #F8FAFC !important;
     border-radius: 12px !important;
-}
+}}
 
-[data-testid="stExpander"] {
-    background: rgba(12, 16, 26, 0.65) !important;
+[data-testid="stExpander"] {{
+    background: rgba(6, 11, 24, 0.75) !important;
     backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(251, 191, 36, 0.16) !important;
     border-radius: 12px !important;
-}
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -319,29 +359,29 @@ hr {
 # ─────────────────────────────────────────────────────────────────────────────
 COLORS = dict(
     obs="#38BDF8",        # Electric Cyan (Observed rotational velocity)
-    bar="#A78BFA",        # Nebula Violet (Baryonic visible matter curve)
+    bar="#FBBF24",        # Solar Amber (Baryonic visible matter curve)
     gas="#34D399",        # Aurora Emerald (Gas component)
-    disk="#FBBF24",       # Golden Star Amber (Stellar disk)
-    bulge="#F472B6",      # Rose Quartz (Bulge component)
-    dark="#60A5FA",       # Pulsar Blue (Inferred dark matter mass profile)
-    anomaly="#FB923C",    # Solar Coral (Kinematic anomalies)
+    disk="#60A5FA",       # Celestial Sky Blue (Stellar disk)
+    bulge="#C084FC",      # Nebula Amethyst (Bulge component)
+    dark="#38BDF8",       # Pulsar Cyan (Inferred dark matter mass profile)
+    anomaly="#F59E0B",    # Solar Flare Amber (Kinematic anomalies - strictly no red)
 )
 
 def _celestial_theme(fig, axes):
     """Styles matplotlib plots with Deep Space Obsidian backdrop and clean telemetry grid."""
-    fig.patch.set_facecolor("#080B12")
+    fig.patch.set_facecolor("#040711")
     for ax in (axes if hasattr(axes, "__iter__") else [axes]):
-        ax.set_facecolor("#0C101A")
+        ax.set_facecolor("#070C1A")
         ax.tick_params(colors="#94A3B8", labelsize=9)
         ax.xaxis.label.set_color("#CBD5E1")
         ax.yaxis.label.set_color("#CBD5E1")
         ax.title.set_color("#F8FAFC")
         for s in ax.spines.values():
-            s.set_edgecolor("#1E2638")
+            s.set_edgecolor("#1E293B")
             s.set_linewidth(1.0)
-        ax.grid(True, color="#1E2638", alpha=0.6, linestyle="--", linewidth=0.7)
+        ax.grid(True, color="#1E293B", alpha=0.55, linestyle="--", linewidth=0.7)
 
-LEG = dict(facecolor="#0C101A", edgecolor="#1E2638", labelcolor="#F8FAFC")
+LEG = dict(facecolor="#070C1A", edgecolor="#1E293B", labelcolor="#F8FAFC")
 
 @st.cache_data
 def _galaxies():
@@ -1058,7 +1098,7 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #64748B; font-size: 0.85rem; padding: 14px 0;'>
     <b>COSMATRIX</b> — An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform<br>
-    Observational Data: SPARC (Lelli et al. 2016) • Theme: Animated Galactic Vortex &amp; Cosmic Glass HUD<br>
+    Observational Data: SPARC (Lelli et al. 2016) • Cosmic Glass Observatory HUD<br>
     Purva (Data Pipeline) • Suyash (Physics Modeling) • Bhavya (Dashboard &amp; Integration)
 </div>
 """, unsafe_allow_html=True)
