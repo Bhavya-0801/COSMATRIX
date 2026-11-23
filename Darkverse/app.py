@@ -1,6 +1,7 @@
 """
-DARKVERSE — Interactive Dashboard  (Person 3)
+DARKVERSE — Interactive Dashboard (Person 3)
 Fully integrated Streamlit app connecting Person 1 & Person 2 modules.
+Theme: Charcoal (#1E1E1C) & Sand (#D8CBB3) - 70/30 Rule, Realistic Micro-interactions.
 
 Deploy on Streamlit Community Cloud:
   Main file path: Darkverse/app.py
@@ -49,73 +50,253 @@ from analysis.anomaly_detection import analyze_anomalies
 # PAGE CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="DARKVERSE",
+    page_title="DARKVERSE — Galaxy Analytics",
     page_icon="🌌",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# DARK SPACE THEME
+# CHARCOAL (#1E1E1C) & SAND (#D8CBB3) THEME — 70/30 ARCHITECTURE
+# No gradients, solid matte surfaces, realistic micro-interactions
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-.stApp{background:linear-gradient(135deg,#0a0a1a 0%,#0d1b2a 50%,#0a0a1a 100%);color:#e0e0ff}
-[data-testid="stSidebar"]{background:linear-gradient(180deg,#0d1b2a,#0a0f1e);border-right:1px solid #1e3a5f}
-h1,h2,h3{color:#7ec8e3!important}
-h1{text-shadow:0 0 20px #7ec8e3}
-[data-testid="metric-container"]{background:rgba(14,30,60,.7);border:1px solid #1e4a7f;border-radius:8px;padding:12px}
-[data-testid="metric-container"] [data-testid="stMetricLabel"]{color:#a0c4e8!important}
-[data-testid="metric-container"] [data-testid="stMetricValue"]{color:#7ec8e3!important}
-.stTabs [data-baseweb="tab-list"]{background-color:rgba(10,20,40,.8);border-radius:8px}
-.stTabs [data-baseweb="tab"]{color:#a0c4e8}
-.stTabs [aria-selected="true"]{background-color:rgba(30,74,127,.5);color:#7ec8e3!important}
-.stButton>button{background:linear-gradient(135deg,#1e3a5f,#0d4f8a);color:#e0e0ff;border:1px solid #3a7abd;border-radius:6px}
-.stButton>button:hover{background:linear-gradient(135deg,#0d4f8a,#1565c0);border-color:#7ec8e3}
-hr{border-color:#1e3a5f}
+/* CSS Reset & Global Baseline: 70% Charcoal Base */
+.stApp {
+    background-color: #1E1E1C !important;
+    color: #E8E2D6 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Sidebar: Solid Deep Charcoal with Sand Accents */
+[data-testid="stSidebar"] {
+    background-color: #181816 !important;
+    border-right: 1px solid #33332F !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
+[data-testid="stSidebar"] label {
+    color: #BFB6A4 !important;
+}
+
+/* Typography: 30% Sand Accents */
+h1, h2, h3, h4, h5, h6 {
+    color: #D8CBB3 !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+}
+
+p, span, div {
+    color: #E8E2D6;
+}
+
+/* Realistic Micro-Interaction Animations */
+@keyframes subtleEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stMetric, .stAlert, [data-testid="stExpander"], div[data-testid="stPlotlyChart"], .element-container {
+    animation: subtleEntrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Metric Cards: Charcoal Surface (#262624) + Sand Highlighting (#D8CBB3) */
+[data-testid="metric-container"] {
+    background-color: #262624 !important;
+    border: 1px solid #383834 !important;
+    border-radius: 6px !important;
+    padding: 14px 18px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+[data-testid="metric-container"]:hover {
+    transform: translateY(-2px);
+    border-color: #D8CBB3 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-testid="metric-container"] [data-testid="stMetricLabel"] {
+    color: #A8A090 !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+[data-testid="metric-container"] [data-testid="stMetricValue"] {
+    color: #D8CBB3 !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+}
+
+/* Tab Navigation: Precision Engineered Sand Accents */
+.stTabs [data-baseweb="tab-list"] {
+    background-color: #262624 !important;
+    border: 1px solid #33332F !important;
+    border-radius: 6px !important;
+    padding: 4px !important;
+    gap: 2px !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    color: #A8A090 !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 8px 16px !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    transition: color 0.15s ease, background-color 0.15s ease !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    color: #E8E2D6 !important;
+    background-color: #2D2D2A !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: #383834 !important;
+    color: #D8CBB3 !important;
+    font-weight: 600 !important;
+}
+
+/* Buttons: Matte Charcoal with Sand Border/Text */
+.stButton > button {
+    background-color: #262624 !important;
+    color: #D8CBB3 !important;
+    border: 1px solid #484842 !important;
+    border-radius: 5px !important;
+    padding: 6px 16px !important;
+    font-weight: 500 !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease !important;
+}
+
+.stButton > button:hover {
+    background-color: #33332F !important;
+    border-color: #D8CBB3 !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px);
+}
+
+.stButton > button:active {
+    transform: translateY(0);
+}
+
+/* Selectbox and Inputs */
+div[data-baseweb="select"] > div {
+    background-color: #262624 !important;
+    border: 1px solid #383834 !important;
+    border-radius: 5px !important;
+    color: #E8E2D6 !important;
+    transition: border-color 0.2s ease !important;
+}
+
+div[data-baseweb="select"] > div:hover,
+div[data-baseweb="select"] > div:focus-within {
+    border-color: #D8CBB3 !important;
+}
+
+/* Data Table Styling */
+div[data-testid="stDataFrame"] {
+    background-color: #262624 !important;
+    border: 1px solid #33332F !important;
+    border-radius: 6px !important;
+}
+
+/* Dividers */
+hr {
+    border: 0 !important;
+    height: 1px !important;
+    background-color: #33332F !important;
+    margin: 20px 0 !important;
+}
+
+/* Alerts / Expanders */
+.stAlert {
+    background-color: #262624 !important;
+    border: 1px solid #3E3E38 !important;
+    color: #E8E2D6 !important;
+    border-radius: 6px !important;
+}
+[data-testid="stExpander"] {
+    background-color: #262624 !important;
+    border: 1px solid #33332F !important;
+    border-radius: 6px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# HELPERS
+# SCIENTIFIC PLOTTING PALETTE — Charcoal Backgrounds, Sand Highlighting
 # ─────────────────────────────────────────────────────────────────────────────
-COLORS = dict(obs="#00bfff", bar="#ff6b6b", gas="#51cf66",
-              disk="#ffd43b", bulge="#cc5de8", dark="#ff922b", anomaly="#ff4757")
+COLORS = dict(
+    obs="#D8CBB3",       # Primary Sand (Observed velocity)
+    bar="#C48E66",       # Terracotta Sand (Baryonic velocity)
+    gas="#7D9D8B",       # Muted Sage Slate (Gas component)
+    disk="#D9B48F",      # Light Sand (Disk component)
+    bulge="#9C8E7E",     # Warm Taupe (Bulge component)
+    dark="#E09E60",      # Amber Sand (Dark matter mass proxy)
+    anomaly="#C85A3C",   # Scientific Vermilion (Anomalies)
+)
 
 def _dark(fig, axes):
-    fig.patch.set_facecolor("#0a0a1a")
+    """Applies authentic scientific charcoal styling with sand accents to plots."""
+    fig.patch.set_facecolor("#1E1E1C")
     for ax in (axes if hasattr(axes, "__iter__") else [axes]):
-        ax.set_facecolor("#0a0f1e")
-        ax.tick_params(colors="#a0c4e8")
-        ax.xaxis.label.set_color("#a0c4e8")
-        ax.yaxis.label.set_color("#a0c4e8")
-        ax.title.set_color("#7ec8e3")
-        for s in ax.spines.values(): s.set_edgecolor("#1e3a5f")
-        ax.grid(True, color="#1e3a5f", alpha=0.4)
+        ax.set_facecolor("#262624")
+        ax.tick_params(colors="#D8CBB3", labelsize=9)
+        ax.xaxis.label.set_color("#D8CBB3")
+        ax.yaxis.label.set_color("#D8CBB3")
+        ax.title.set_color("#D8CBB3")
+        for s in ax.spines.values():
+            s.set_edgecolor("#383834")
+            s.set_linewidth(1.0)
+        ax.grid(True, color="#383834", alpha=0.5, linestyle="--", linewidth=0.7)
 
-LEG = dict(facecolor="#0a0f1e", edgecolor="#1e3a5f", labelcolor="#e0e0ff")
+LEG = dict(facecolor="#262624", edgecolor="#383834", labelcolor="#D8CBB3")
 
 @st.cache_data
-def _galaxies(): return list_available_galaxies()
+def _galaxies():
+    return list_available_galaxies()
 
 @st.cache_data
 def _meta():
-    try:    return load_galaxy_metadata()
-    except: return pd.DataFrame()
+    try:
+        return load_galaxy_metadata()
+    except Exception:
+        return pd.DataFrame()
 
 @st.cache_data
 def _analyse(name):
     df = load_galaxy_for_analysis(name)
-    for fn in [calculate_rotation_curves, calculate_velocity_difference,
-               calculate_percentage_difference, estimate_galaxy_mass, analyze_anomalies]:
+    for fn in [
+        calculate_rotation_curves,
+        calculate_velocity_difference,
+        calculate_percentage_difference,
+        estimate_galaxy_mass,
+        analyze_anomalies,
+    ]:
         df = fn(df)
     return df
 
 @st.cache_data
 def _multi(names_tuple):
     df = load_multiple_galaxies(list(names_tuple))
-    for fn in [calculate_rotation_curves, calculate_velocity_difference,
-               calculate_percentage_difference, estimate_galaxy_mass, analyze_anomalies]:
+    for fn in [
+        calculate_rotation_curves,
+        calculate_velocity_difference,
+        calculate_percentage_difference,
+        estimate_galaxy_mass,
+        analyze_anomalies,
+    ]:
         df = fn(df)
     return df
 
@@ -123,383 +304,678 @@ def _multi(names_tuple):
 # SIDEBAR
 # ─────────────────────────────────────────────────────────────────────────────
 glist = _galaxies()
-meta  = _meta()
+meta = _meta()
 
 with st.sidebar:
     st.markdown("## 🌌 DARKVERSE")
-    st.markdown("*Dark Matter & Galactic Behaviour Analytics*")
+    st.caption("Dark Matter & Galactic Dynamics Analytics Platform")
     st.markdown("---")
-    st.markdown(f"**📊 Dataset:** {len(glist)} SPARC galaxies")
-    st.markdown("**🔭 Source:** Lelli et al. 2016")
+    st.markdown(f"**Dataset:** {len(glist)} SPARC Galaxies")
+    st.markdown("**Catalog:** Lelli et al. 2016")
     st.markdown("---")
 
-    st.markdown("### 🔭 Galaxy Explorer")
-    sel = st.selectbox("Select Galaxy", glist,
-                       index=glist.index("CamB") if "CamB" in glist else 0)
+    st.markdown("### 🔭 Galaxy Target")
+    sel = st.selectbox(
+        "Select Target",
+        glist,
+        index=glist.index("CamB") if "CamB" in glist else 0,
+        help="Select a galaxy to analyze observational rotation curves and dark matter signatures",
+    )
 
-    st.markdown("### 📡 Multi-Galaxy Compare")
-    cmp = st.multiselect("Compare Galaxies", glist, default=glist[:3], max_selections=8)
+    st.markdown("### 📡 Multi-Galaxy Cohort")
+    cmp = st.multiselect(
+        "Cohort Comparison",
+        glist,
+        default=glist[:3] if len(glist) >= 3 else glist,
+        max_selections=8,
+        help="Select up to 8 galaxies for side-by-side behavioral comparison",
+    )
 
     st.markdown("---")
-    st.markdown("### ⚙️ Settings")
-    show_err   = st.checkbox("Show Error Bars", True)
-    show_comp  = st.checkbox("Show Velocity Components", True)
-    anom_mode  = st.radio("Anomaly Highlight",
-                          ["Both (Z-score & IQR)","Z-score Only","IQR Only","None"])
+    st.markdown("### ⚙️ Analytical Settings")
+    show_err = st.checkbox("Measurement Uncertainties (errV)", True)
+    show_comp = st.checkbox("Baryonic Components (Gas/Disk/Bulge)", True)
+    anom_mode = st.radio(
+        "Anomaly Detection Criteria",
+        ["Both (Z-score & IQR)", "Z-score Only", "IQR Only", "None"],
+    )
     st.markdown("---")
-    st.caption("Person 3 — Integration & Dashboard\nPerson 1 — Data Pipeline\nPerson 2 — Analysis Modules")
+    st.caption(
+        "Scientific Pipeline:\n"
+        "• Person 1: SPARC Ingestion & Cleaning\n"
+        "• Person 2: Kinematic & Physics Analytics\n"
+        "• Person 3: Data Bridge & Interactive Dashboard"
+    )
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HEADER
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
-<div style='text-align:center;padding:20px 0 10px'>
-<h1 style='font-size:3em;letter-spacing:.1em'>🌌 DARKVERSE</h1>
-<p style='color:#a0c4e8;font-size:1.1em'>
-An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform</p>
-</div>""", unsafe_allow_html=True)
+<div style='padding: 10px 0 16px;'>
+    <h1 style='font-size: 2.4rem; margin-bottom: 4px;'>DARKVERSE</h1>
+    <p style='color: #D8CBB3; font-size: 1.05rem; margin-top: 0;'>
+        An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform
+    </p>
+</div>
+""", unsafe_allow_html=True)
 st.markdown("---")
 
-# ── Overview metrics ──────────────────────────────────────────────────────────
-c1,c2,c3,c4,c5 = st.columns(5)
-c1.metric("🌠 Galaxies", len(glist))
+# ── Overview Metrics ──────────────────────────────────────────────────────────
+c1, c2, c3, c4, c5 = st.columns(5)
+c1.metric("Catalog Galaxies", len(glist))
 if not meta.empty:
-    d  = pd.to_numeric(meta.get("D"), errors="coerce")
-    vf = pd.to_numeric(meta.get("Vflat"), errors="coerce").replace(0,np.nan)
-    t  = pd.to_numeric(meta.get("T"), errors="coerce")
-    c2.metric("📏 Avg Distance", f"{d.mean():.1f} Mpc"  if d.notna().any() else "N/A")
-    c3.metric("⚡ Avg V_flat",   f"{vf.mean():.0f} km/s" if vf.notna().any() else "N/A")
-    c4.metric("🌀 Morphologies", f"{t.dropna().nunique()}" if t.notna().any() else "N/A")
+    d = pd.to_numeric(meta.get("D"), errors="coerce")
+    vf = pd.to_numeric(meta.get("Vflat"), errors="coerce").replace(0, np.nan)
+    t = pd.to_numeric(meta.get("T"), errors="coerce")
+    c2.metric("Mean Distance", f"{d.mean():.1f} Mpc" if d.notna().any() else "N/A")
+    c3.metric("Mean V_flat", f"{vf.mean():.0f} km/s" if vf.notna().any() else "N/A")
+    c4.metric("Morphology Types", f"{t.dropna().nunique()}" if t.notna().any() else "N/A")
 else:
-    c2.metric("📏 Avg Distance","N/A"); c3.metric("⚡ Avg V_flat","N/A"); c4.metric("🌀 Morphologies","N/A")
-c5.metric("🔬 Modules", "5")
+    c2.metric("Mean Distance", "N/A")
+    c3.metric("Mean V_flat", "N/A")
+    c4.metric("Morphology Types", "N/A")
+c5.metric("Analysis Engines", "5 Active")
 st.markdown("---")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # TABS
 # ─────────────────────────────────────────────────────────────────────────────
-t1,t2,t3,t4,t5,t6 = st.tabs([
-    "🔭 Rotation Curve","⚖️ Mass Analysis","📊 Statistics",
-    "🚨 Anomaly Detection","🌐 Galaxy Comparison","📋 Dataset Overview"])
+t1, t2, t3, t4, t5, t6 = st.tabs([
+    "🔭 Rotation Curves",
+    "⚖️ Mass & Dark Matter",
+    "📊 Statistical Metrics",
+    "🚨 Kinematic Anomalies",
+    "🌐 Galaxy Cohort",
+    "📋 SPARC Metadata",
+])
 
 # ══════════════════ TAB 1 — ROTATION CURVE ═══════════════════════════════════
 with t1:
-    st.header(f"🔭 Rotation Curve: {sel}")
+    st.subheader(f"Kinematic Rotation Curve: {sel}")
     try:
         df = _analyse(sel)
-        # metadata row
         if not meta.empty:
-            gm = meta[meta["Galaxy"].astype(str).str.strip()==sel]
+            gm = meta[meta["Galaxy"].astype(str).str.strip() == sel]
             if not gm.empty:
                 gm = gm.iloc[0]
-                m1,m2,m3,m4 = st.columns(4)
-                m1.metric("Distance",    f"{gm['D']:.2f} Mpc"   if pd.notna(gm.get('D'))     else "N/A")
-                m2.metric("Inclination", f"{gm['Inc']:.0f}°"    if pd.notna(gm.get('Inc'))   else "N/A")
-                m3.metric("V_flat",      f"{gm['Vflat']:.0f} km/s" if pd.notna(gm.get('Vflat')) and gm['Vflat']>0 else "N/A")
-                m4.metric("Type (T)",    f"{int(gm['T'])}"       if pd.notna(gm.get('T'))     else "N/A")
+                m1, m2, m3, m4 = st.columns(4)
+                m1.metric("Distance (D)", f"{gm['D']:.2f} Mpc" if pd.notna(gm.get("D")) else "N/A")
+                m2.metric("Inclination (i)", f"{gm['Inc']:.0f}°" if pd.notna(gm.get("Inc")) else "N/A")
+                m3.metric(
+                    "Asymptotic V_flat",
+                    f"{gm['Vflat']:.0f} km/s"
+                    if pd.notna(gm.get("Vflat")) and gm["Vflat"] > 0
+                    else "N/A",
+                )
+                m4.metric("Hubble Stage (T)", f"{int(gm['T'])}" if pd.notna(gm.get("T")) else "N/A")
 
-        fig,axes = plt.subplots(1,2,figsize=(14,5)); _dark(fig,axes)
+        fig, axes = plt.subplots(1, 2, figsize=(14, 5.2))
+        _dark(fig, axes)
 
-        # anomaly masks
-        if   anom_mode=="Both (Z-score & IQR)": amask = df["Final_Anomaly"]
-        elif anom_mode=="Z-score Only":          amask = df["Zscore_Anomaly"]
-        elif anom_mode=="IQR Only":              amask = df["IQR_Anomaly"]
-        else:                                    amask = pd.Series(False, index=df.index)
-        norm = df[~amask]; anom = df[amask]
+        if anom_mode == "Both (Z-score & IQR)":
+            amask = df["Final_Anomaly"]
+        elif anom_mode == "Z-score Only":
+            amask = df["Zscore_Anomaly"]
+        elif anom_mode == "IQR Only":
+            amask = df["IQR_Anomaly"]
+        else:
+            amask = pd.Series(False, index=df.index)
+        norm = df[~amask]
+        anom = df[amask]
 
+        # Left: Rotation Curve
         ax = axes[0]
         if show_err:
-            ax.errorbar(norm["Radius_kpc"],norm["V_obs_km_s"],yerr=norm.get("errV",0),
-                        fmt="o",color=COLORS["obs"],capsize=3,label="V_obs",markersize=4,alpha=.85)
+            ax.errorbar(
+                norm["Radius_kpc"],
+                norm["V_obs_km_s"],
+                yerr=norm.get("errV", 0),
+                fmt="o",
+                color=COLORS["obs"],
+                capsize=3,
+                label="Observed Velocity (V_obs)",
+                markersize=4.5,
+                alpha=0.9,
+            )
         else:
-            ax.scatter(norm["Radius_kpc"],norm["V_obs_km_s"],color=COLORS["obs"],label="V_obs",s=25,alpha=.85)
-        ax.plot(df["Radius_kpc"],df["V_bar_km_s"],color=COLORS["bar"],lw=2,label="V_bar (Baryonic)")
+            ax.scatter(
+                norm["Radius_kpc"],
+                norm["V_obs_km_s"],
+                color=COLORS["obs"],
+                label="Observed Velocity (V_obs)",
+                s=28,
+                alpha=0.9,
+            )
+        ax.plot(
+            df["Radius_kpc"],
+            df["V_bar_km_s"],
+            color=COLORS["bar"],
+            lw=2.2,
+            label="Baryonic Visible Matter (V_bar)",
+        )
         if show_comp:
-            ax.plot(df["Radius_kpc"],df["V_gas_km_s"],  color=COLORS["gas"],  lw=1,ls="--",label="V_gas",  alpha=.7)
-            ax.plot(df["Radius_kpc"],df["V_disk_km_s"], color=COLORS["disk"], lw=1,ls="--",label="V_disk", alpha=.7)
-            ax.plot(df["Radius_kpc"],df["V_bulge_km_s"],color=COLORS["bulge"],lw=1,ls="--",label="V_bulge",alpha=.7)
+            ax.plot(
+                df["Radius_kpc"],
+                df["V_gas_km_s"],
+                color=COLORS["gas"],
+                lw=1.2,
+                ls="--",
+                label="Gas Component",
+                alpha=0.8,
+            )
+            ax.plot(
+                df["Radius_kpc"],
+                df["V_disk_km_s"],
+                color=COLORS["disk"],
+                lw=1.2,
+                ls="--",
+                label="Stellar Disk",
+                alpha=0.8,
+            )
+            ax.plot(
+                df["Radius_kpc"],
+                df["V_bulge_km_s"],
+                color=COLORS["bulge"],
+                lw=1.2,
+                ls="--",
+                label="Bulge Component",
+                alpha=0.8,
+            )
         if not anom.empty:
-            ax.scatter(anom["Radius_kpc"],anom["V_obs_km_s"],
-                       color=COLORS["anomaly"],s=80,zorder=5,marker="*",label=f"Anomalies ({len(anom)})")
-        ax.set_xlabel("Radius (kpc)"); ax.set_ylabel("Velocity (km/s)")
-        ax.set_title(f"Rotation Curve: {sel}"); ax.legend(fontsize=7,**LEG)
+            ax.scatter(
+                anom["Radius_kpc"],
+                anom["V_obs_km_s"],
+                color=COLORS["anomaly"],
+                s=90,
+                zorder=5,
+                marker="x",
+                linewidths=2,
+                label=f"Flagged Points ({len(anom)})",
+            )
+        ax.set_xlabel("Galactocentric Radius (kpc)")
+        ax.set_ylabel("Rotational Velocity (km/s)")
+        ax.set_title(f"Velocity Distribution — {sel}")
+        ax.legend(fontsize=8, **LEG)
 
+        # Right: Velocity Residual (Dark Matter Signature)
         ax2 = axes[1]
-        ax2.axhline(0,color="#fff",lw=.8,ls="--",alpha=.5)
-        ax2.scatter(df["Radius_kpc"],df["Velocity_Difference_km_s"],color=COLORS["obs"],s=25,alpha=.75)
-        ax2.fill_between(df["Radius_kpc"],df["Velocity_Difference_km_s"],alpha=.15,color=COLORS["obs"])
-        ax2.set_xlabel("Radius (kpc)"); ax2.set_ylabel("Residual (km/s)")
-        ax2.set_title(f"Velocity Residual: {sel}")
-        st.pyplot(fig); plt.close()
+        ax2.axhline(0, color="#6E6E66", lw=1.0, ls="--")
+        ax2.scatter(
+            df["Radius_kpc"],
+            df["Velocity_Difference_km_s"],
+            color=COLORS["obs"],
+            s=28,
+            alpha=0.85,
+            label="Residual ΔV (V_obs − V_bar)",
+        )
+        ax2.fill_between(
+            df["Radius_kpc"],
+            df["Velocity_Difference_km_s"],
+            alpha=0.15,
+            color=COLORS["obs"],
+        )
+        ax2.set_xlabel("Galactocentric Radius (kpc)")
+        ax2.set_ylabel("Velocity Excess ΔV (km/s)")
+        ax2.set_title(f"Non-Baryonic Velocity Discrepancy — {sel}")
+        ax2.legend(fontsize=8, **LEG)
+        st.pyplot(fig)
+        plt.close()
 
-        km1,km2,km3,km4 = st.columns(4)
-        km1.metric("Max V_obs",    f"{df['V_obs_km_s'].max():.1f} km/s")
-        km2.metric("Max V_bar",    f"{df['V_bar_km_s'].max():.1f} km/s")
-        km3.metric("Mean Residual",f"{df['Velocity_Difference_km_s'].mean():.1f} km/s")
-        km4.metric("Anomalies",    f"{df['Final_Anomaly'].sum()}")
+        km1, km2, km3, km4 = st.columns(4)
+        km1.metric("Peak V_obs", f"{df['V_obs_km_s'].max():.1f} km/s")
+        km2.metric("Peak V_bar", f"{df['V_bar_km_s'].max():.1f} km/s")
+        km3.metric("Mean Velocity Excess", f"{df['Velocity_Difference_km_s'].mean():.1f} km/s")
+        km4.metric("Statistical Anomalies", f"{int(df['Final_Anomaly'].sum())}")
 
-        with st.expander("📄 Raw Data"):
-            st.dataframe(df.style.format({c:"{:.3f}" for c in df.select_dtypes("float").columns}),
-                         use_container_width=True)
+        with st.expander("Explore Processed Observational Data"):
+            st.dataframe(
+                df.style.format({c: "{:.3f}" for c in df.select_dtypes("float").columns}),
+                use_container_width=True,
+            )
     except Exception as e:
-        st.error(f"Error: {e}")
+        st.error(f"Error computing rotation curves: {e}")
 
 # ══════════════════ TAB 2 — MASS ANALYSIS ════════════════════════════════════
 with t2:
-    st.header(f"⚖️ Mass Analysis: {sel}")
+    st.subheader(f"Gravitational Mass Profile: {sel}")
     try:
         df = _analyse(sel)
-        fig,axes = plt.subplots(1,2,figsize=(14,5)); _dark(fig,axes)
+        fig, axes = plt.subplots(1, 2, figsize=(14, 5.2))
+        _dark(fig, axes)
 
         ax = axes[0]
-        ax.plot(df["Radius_kpc"],df["Total_Mass_Solar"]/1e10,     color=COLORS["obs"], lw=2,label="Total Mass")
-        ax.plot(df["Radius_kpc"],df["Baryonic_Mass_Solar"]/1e10,  color=COLORS["bar"], lw=2,label="Baryonic Mass")
+        ax.plot(
+            df["Radius_kpc"],
+            df["Total_Mass_Solar"] / 1e10,
+            color=COLORS["obs"],
+            lw=2.2,
+            label="Enclosed Dynamic Mass",
+        )
+        ax.plot(
+            df["Radius_kpc"],
+            df["Baryonic_Mass_Solar"] / 1e10,
+            color=COLORS["bar"],
+            lw=2.2,
+            label="Enclosed Baryonic Mass",
+        )
         dm = df["Additional_Mass_Solar"].dropna()
-        ax.plot(df.loc[dm.index,"Radius_kpc"],dm/1e10,
-                color=COLORS["dark"],lw=2,ls="--",label="Dark Matter Proxy")
-        ax.fill_between(df.loc[dm.index,"Radius_kpc"],dm/1e10,alpha=.2,color=COLORS["dark"])
-        ax.set_xlabel("Radius (kpc)"); ax.set_ylabel("Mass (×10¹⁰ M☉)")
-        ax.set_title(f"Mass Profiles: {sel}"); ax.legend(fontsize=8,**LEG)
+        ax.plot(
+            df.loc[dm.index, "Radius_kpc"],
+            dm / 1e10,
+            color=COLORS["dark"],
+            lw=2.2,
+            ls="--",
+            label="Inferred Dark Matter Halo",
+        )
+        ax.fill_between(
+            df.loc[dm.index, "Radius_kpc"],
+            dm / 1e10,
+            alpha=0.15,
+            color=COLORS["dark"],
+        )
+        ax.set_xlabel("Radius (kpc)")
+        ax.set_ylabel("Enclosed Mass (×10¹⁰ M☉)")
+        ax.set_title(f"Cumulative Mass Profiles — {sel}")
+        ax.legend(fontsize=8, **LEG)
 
         ax2 = axes[1]
-        frac = (df["Additional_Mass_Solar"].fillna(0)/df["Total_Mass_Solar"]*100).clip(0,100)
-        ax2.plot(df["Radius_kpc"],frac,color=COLORS["dark"],lw=2)
-        ax2.fill_between(df["Radius_kpc"],frac,alpha=.3,color=COLORS["dark"])
-        ax2.set_xlabel("Radius (kpc)"); ax2.set_ylabel("Dark Matter Fraction (%)")
-        ax2.set_title(f"DM Fraction vs Radius: {sel}"); ax2.set_ylim(0,100)
-        st.pyplot(fig); plt.close()
+        frac = (df["Additional_Mass_Solar"].fillna(0) / df["Total_Mass_Solar"] * 100).clip(0, 100)
+        ax2.plot(df["Radius_kpc"], frac, color=COLORS["dark"], lw=2.2, label="Dark Matter Ratio")
+        ax2.fill_between(df["Radius_kpc"], frac, alpha=0.2, color=COLORS["dark"])
+        ax2.set_xlabel("Radius (kpc)")
+        ax2.set_ylabel("Dark Matter Ratio (%)")
+        ax2.set_title(f"Dark Matter Fraction Radial Gradient — {sel}")
+        ax2.set_ylim(0, 100)
+        ax2.legend(fontsize=8, **LEG)
+        st.pyplot(fig)
+        plt.close()
 
         last = df.iloc[-1]
-        mm1,mm2,mm3,mm4 = st.columns(4)
-        mm1.metric("Total Mass",    f"{last['Total_Mass_Solar']/1e10:.2f} ×10¹⁰ M☉")
-        mm2.metric("Baryonic Mass", f"{last['Baryonic_Mass_Solar']/1e10:.2f} ×10¹⁰ M☉")
+        mm1, mm2, mm3, mm4 = st.columns(4)
+        mm1.metric("Total Outer Mass", f"{last['Total_Mass_Solar']/1e10:.2f} ×10¹⁰ M☉")
+        mm2.metric("Baryonic Outer Mass", f"{last['Baryonic_Mass_Solar']/1e10:.2f} ×10¹⁰ M☉")
         dm_v = last.get("Additional_Mass_Solar")
-        mm3.metric("DM Proxy",      f"{dm_v/1e10:.2f} ×10¹⁰ M☉" if pd.notna(dm_v) and dm_v else "N/A")
-        mm4.metric("DM Fraction",   f"{dm_v/last['Total_Mass_Solar']*100:.1f}%" if pd.notna(dm_v) and dm_v else "0.0%")
+        mm3.metric(
+            "Dark Matter Proxy",
+            f"{dm_v/1e10:.2f} ×10¹⁰ M☉" if pd.notna(dm_v) and dm_v else "N/A",
+        )
+        mm4.metric(
+            "Outer DM Dominance",
+            f"{dm_v/last['Total_Mass_Solar']*100:.1f}%" if pd.notna(dm_v) and dm_v else "0.0%",
+        )
 
-        with st.expander("📄 Mass Table"):
-            cols = ["Radius_kpc","V_obs_km_s","V_bar_km_s","Total_Mass_Solar","Baryonic_Mass_Solar","Additional_Mass_Solar"]
-            st.dataframe(df[cols].style.format("{:.3e}",
-                subset=["Total_Mass_Solar","Baryonic_Mass_Solar","Additional_Mass_Solar"]
-            ).format("{:.3f}",subset=["Radius_kpc","V_obs_km_s","V_bar_km_s"]),use_container_width=True)
+        with st.expander("Inspect Mass Model Quantities"):
+            cols = [
+                "Radius_kpc",
+                "V_obs_km_s",
+                "V_bar_km_s",
+                "Total_Mass_Solar",
+                "Baryonic_Mass_Solar",
+                "Additional_Mass_Solar",
+            ]
+            st.dataframe(
+                df[cols]
+                .style.format(
+                    "{:.3e}",
+                    subset=["Total_Mass_Solar", "Baryonic_Mass_Solar", "Additional_Mass_Solar"],
+                )
+                .format("{:.3f}", subset=["Radius_kpc", "V_obs_km_s", "V_bar_km_s"]),
+                use_container_width=True,
+            )
     except Exception as e:
-        st.error(f"Error: {e}")
+        st.error(f"Error computing mass estimates: {e}")
 
 # ══════════════════ TAB 3 — STATISTICS ═══════════════════════════════════════
 with t3:
-    st.header(f"📊 Statistical Analysis: {sel}")
+    st.subheader(f"Statistical Modeling & Diagnostics: {sel}")
     try:
         df = _analyse(sel)
         desc = calculate_descriptive_statistics(df)
         corr = calculate_correlation(df)
-        vs   = calculate_velocity_statistics(df)
+        vs = calculate_velocity_statistics(df)
 
-        st.subheader("⚡ Velocity Residual Metrics")
-        v1,v2,v3,v4 = st.columns(4)
-        v1.metric("Mean Residual",        f"{vs['Mean_Residual']:.2f} km/s")
-        v2.metric("MAE",                  f"{vs['MAE']:.2f} km/s")
-        v3.metric("RMSE",                 f"{vs['RMSE']:.2f} km/s")
-        v4.metric("Corr(V_obs,V_bar)",    f"{vs['Correlation']:.4f}")
+        v1, v2, v3, v4 = st.columns(4)
+        v1.metric("Mean Residual ΔV", f"{vs['Mean_Residual']:.2f} km/s")
+        v2.metric("Mean Absolute Error", f"{vs['MAE']:.2f} km/s")
+        v3.metric("Root Mean Square Error", f"{vs['RMSE']:.2f} km/s")
+        v4.metric("Pearson Corr (V_obs, V_bar)", f"{vs['Correlation']:.4f}")
 
-        ca,cb = st.columns(2)
+        ca, cb = st.columns(2)
         with ca:
-            st.subheader("📋 Descriptive Statistics")
-            st.dataframe(pd.DataFrame(desc).T.style.format("{:.3f}"),use_container_width=True)
+            st.markdown("##### Descriptive Statistics")
+            st.dataframe(pd.DataFrame(desc).T.style.format("{:.3f}"), use_container_width=True)
         with cb:
-            st.subheader("🔗 Correlation Heatmap")
-            fig,ax = plt.subplots(figsize=(6,4)); _dark(fig,ax)
-            sns.heatmap(corr,annot=True,fmt=".2f",cmap="coolwarm",ax=ax,
-                        linewidths=.5,cbar_kws={"shrink":.8},annot_kws={"size":8})
-            ax.set_title(f"Correlation: {sel}",pad=10)
-            plt.tight_layout(); st.pyplot(fig); plt.close()
+            st.markdown("##### Correlation Matrix")
+            fig, ax = plt.subplots(figsize=(6, 4))
+            _dark(fig, ax)
+            sns.heatmap(
+                corr,
+                annot=True,
+                fmt=".2f",
+                cmap="copper",
+                ax=ax,
+                linewidths=0.5,
+                linecolor="#383834",
+                cbar_kws={"shrink": 0.8},
+                annot_kws={"size": 8, "color": "#E8E2D6"},
+            )
+            ax.set_title(f"Parameter Correlation — {sel}", pad=10)
+            plt.tight_layout()
+            st.pyplot(fig)
+            plt.close()
 
-        st.subheader("📈 Velocity Distributions")
-        fig2,axes2 = plt.subplots(1,3,figsize=(14,4)); _dark(fig2,axes2)
-        for ax_,col_,clr_,lbl_ in zip(axes2,
-            ["V_obs_km_s","V_bar_km_s","Velocity_Difference_km_s"],
-            [COLORS["obs"],COLORS["bar"],COLORS["dark"]],
-            ["V_obs (km/s)","V_bar (km/s)","Residual (km/s)"]):
-            ax_.hist(df[col_].dropna(),bins=15,color=clr_,alpha=.8,edgecolor="#0a0a1a")
-            ax_.axvline(df[col_].mean(),color="white",ls="--",lw=1)
-            ax_.set_xlabel(lbl_); ax_.set_ylabel("Count"); ax_.set_title(lbl_)
-        st.pyplot(fig2); plt.close()
+        st.markdown("##### Empirical Velocity Distributions")
+        fig2, axes2 = plt.subplots(1, 3, figsize=(14, 4))
+        _dark(fig2, axes2)
+        for ax_, col_, clr_, lbl_ in zip(
+            axes2,
+            ["V_obs_km_s", "V_bar_km_s", "Velocity_Difference_km_s"],
+            [COLORS["obs"], COLORS["bar"], COLORS["dark"]],
+            ["V_obs (km/s)", "V_bar (km/s)", "Residual ΔV (km/s)"],
+        ):
+            ax_.hist(df[col_].dropna(), bins=14, color=clr_, alpha=0.85, edgecolor="#1E1E1C")
+            ax_.axvline(df[col_].mean(), color="#FFFFFF", ls="--", lw=1.2, label="Mean")
+            ax_.set_xlabel(lbl_)
+            ax_.set_ylabel("Frequency")
+            ax_.set_title(lbl_)
+            ax_.legend(fontsize=7, **LEG)
+        st.pyplot(fig2)
+        plt.close()
     except Exception as e:
-        st.error(f"Error: {e}")
+        st.error(f"Error computing statistics: {e}")
 
 # ══════════════════ TAB 4 — ANOMALY DETECTION ════════════════════════════════
 with t4:
-    st.header(f"🚨 Anomaly Detection: {sel}")
+    st.subheader(f"Kinematic Anomaly Detection: {sel}")
     try:
         df = _analyse(sel)
-        zc  = int(df["Zscore_Anomaly"].sum())
-        ic  = int(df["IQR_Anomaly"].sum())
-        fc  = int(df["Final_Anomaly"].sum())
+        zc = int(df["Zscore_Anomaly"].sum())
+        ic = int(df["IQR_Anomaly"].sum())
+        fc = int(df["Final_Anomaly"].sum())
         tot = len(df)
 
-        a1,a2,a3,a4 = st.columns(4)
-        a1.metric("Total Points",   tot)
-        a2.metric("Z-score Flags",  zc)
-        a3.metric("IQR Flags",      ic)
-        a4.metric("🚨 Final Anomalies", fc, delta=f"{fc/tot*100:.1f}%", delta_color="inverse")
+        a1, a2, a3, a4 = st.columns(4)
+        a1.metric("Evaluated Data Points", tot)
+        a2.metric("Z-Score Threshold Exceeded", zc)
+        a3.metric("IQR Boundary Outliers", ic)
+        a4.metric("Confirmed Dual Anomalies", fc, delta=f"{fc/tot*100:.1f}%", delta_color="inverse")
 
-        fig,axes = plt.subplots(1,2,figsize=(14,5)); _dark(fig,axes)
+        fig, axes = plt.subplots(1, 2, figsize=(14, 5.2))
+        _dark(fig, axes)
+
+        # Z-Score
         ax = axes[0]
         nm = ~df["Zscore_Anomaly"]
-        ax.scatter(df.loc[nm,"Radius_kpc"],df.loc[nm,"Z_Score"],
-                   color=COLORS["obs"],s=25,alpha=.75,label="Normal")
+        ax.scatter(
+            df.loc[nm, "Radius_kpc"],
+            df.loc[nm, "Z_Score"],
+            color=COLORS["obs"],
+            s=28,
+            alpha=0.8,
+            label="In-Distribution Data",
+        )
         if df["Zscore_Anomaly"].any():
-            ax.scatter(df.loc[df["Zscore_Anomaly"],"Radius_kpc"],
-                       df.loc[df["Zscore_Anomaly"],"Z_Score"],
-                       color=COLORS["anomaly"],s=80,marker="*",zorder=5,label=f"Anomaly ({zc})")
-        ax.axhline(3, color="#ffd43b",ls="--",lw=1,label="+3σ")
-        ax.axhline(-3,color="#ffd43b",ls="--",lw=1,label="−3σ")
-        ax.set_xlabel("Radius (kpc)"); ax.set_ylabel("Z-score")
-        ax.set_title(f"Z-score: {sel}"); ax.legend(fontsize=7,**LEG)
+            ax.scatter(
+                df.loc[df["Zscore_Anomaly"], "Radius_kpc"],
+                df.loc[df["Zscore_Anomaly"], "Z_Score"],
+                color=COLORS["anomaly"],
+                s=90,
+                marker="x",
+                linewidths=2,
+                zorder=5,
+                label=f"Z-Score Outlier (|Z| > 3)",
+            )
+        ax.axhline(3, color="#D8CBB3", ls="--", lw=1, label="+3σ Limit")
+        ax.axhline(-3, color="#D8CBB3", ls="--", lw=1, label="−3σ Limit")
+        ax.set_xlabel("Radius (kpc)")
+        ax.set_ylabel("Standardized Z-Score")
+        ax.set_title(f"Standardized Residual Dispersion — {sel}")
+        ax.legend(fontsize=7, **LEG)
 
+        # IQR Outliers
         ax2 = axes[1]
         r = df["Velocity_Difference_km_s"]
-        Q1,Q3 = r.quantile(.25),r.quantile(.75)
-        IQR = Q3-Q1; lb,ub = Q1-1.5*IQR, Q3+1.5*IQR
+        Q1, Q3 = r.quantile(0.25), r.quantile(0.75)
+        IQR = Q3 - Q1
+        lb, ub = Q1 - 1.5 * IQR, Q3 + 1.5 * IQR
         nm2 = ~df["IQR_Anomaly"]
-        ax2.scatter(df.loc[nm2,"Radius_kpc"],r[nm2],color=COLORS["obs"],s=25,alpha=.75,label="Normal")
+        ax2.scatter(
+            df.loc[nm2, "Radius_kpc"],
+            r[nm2],
+            color=COLORS["obs"],
+            s=28,
+            alpha=0.8,
+            label="Quartile Inliers",
+        )
         if df["IQR_Anomaly"].any():
-            ax2.scatter(df.loc[df["IQR_Anomaly"],"Radius_kpc"],r[df["IQR_Anomaly"]],
-                        color=COLORS["anomaly"],s=80,marker="*",zorder=5,label=f"Anomaly ({ic})")
-        ax2.axhline(ub,color="#ffd43b",ls="--",lw=1,label=f"Upper ({ub:.1f})")
-        ax2.axhline(lb,color="#ffd43b",ls=":",lw=1, label=f"Lower ({lb:.1f})")
-        ax2.set_xlabel("Radius (kpc)"); ax2.set_ylabel("Residual (km/s)")
-        ax2.set_title(f"IQR: {sel}"); ax2.legend(fontsize=7,**LEG)
-        st.pyplot(fig); plt.close()
+            ax2.scatter(
+                df.loc[df["IQR_Anomaly"], "Radius_kpc"],
+                r[df["IQR_Anomaly"]],
+                color=COLORS["anomaly"],
+                s=90,
+                marker="x",
+                linewidths=2,
+                zorder=5,
+                label=f"Tukey Outliers ({ic})",
+            )
+        ax2.axhline(ub, color="#D8CBB3", ls="--", lw=1, label=f"Upper Bound ({ub:.1f})")
+        ax2.axhline(lb, color="#D8CBB3", ls=":", lw=1, label=f"Lower Bound ({lb:.1f})")
+        ax2.set_xlabel("Radius (kpc)")
+        ax2.set_ylabel("Residual ΔV (km/s)")
+        ax2.set_title(f"Interquartile Range Bounds — {sel}")
+        ax2.legend(fontsize=7, **LEG)
+        st.pyplot(fig)
+        plt.close()
 
-        if fc>0:
-            st.warning(f"⚠️ {fc} point(s) flagged by both methods.")
-            with st.expander("🔍 Anomaly Details"):
-                cols = ["Radius_kpc","V_obs_km_s","V_bar_km_s","Velocity_Difference_km_s",
-                        "Z_Score","Zscore_Anomaly","IQR_Anomaly","Final_Anomaly"]
-                st.dataframe(df[df["Final_Anomaly"]][cols],use_container_width=True)
+        if fc > 0:
+            st.warning(
+                f"{fc} observation(s) meet both Z-score and IQR anomaly criteria. "
+                "Investigate observational quality flags or non-circular dynamics."
+            )
+            with st.expander("View Anomaly Records"):
+                cols = [
+                    "Radius_kpc",
+                    "V_obs_km_s",
+                    "V_bar_km_s",
+                    "Velocity_Difference_km_s",
+                    "Z_Score",
+                    "Zscore_Anomaly",
+                    "IQR_Anomaly",
+                    "Final_Anomaly",
+                ]
+                st.dataframe(df[df["Final_Anomaly"]][cols], use_container_width=True)
         else:
-            st.success("✅ No significant anomalies detected.")
+            st.info("No significant kinematic anomalies detected under standard criteria.")
     except Exception as e:
-        st.error(f"Error: {e}")
+        st.error(f"Error executing anomaly detection: {e}")
 
 # ══════════════════ TAB 5 — GALAXY COMPARISON ════════════════════════════════
 with t5:
-    st.header("🌐 Multi-Galaxy Comparison")
-    if len(cmp)<2:
-        st.info("👈 Select at least 2 galaxies in the sidebar.")
+    st.subheader("Multi-Galaxy Kinematic Cohort Comparison")
+    if len(cmp) < 2:
+        st.info("Select at least 2 galaxies from the sidebar to generate cohort comparisons.")
     else:
         try:
             cdf = _multi(tuple(cmp))
-            pal = plt.cm.tab10.colors
-            fig,axes = plt.subplots(2,2,figsize=(14,10)); _dark(fig,axes.flatten())
+            cohort_palette = ["#D8CBB3", "#C48E66", "#7D9D8B", "#D9B48F", "#9C8E7E", "#E09E60", "#B3A58C", "#E2D3B8"]
+            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+            _dark(fig, axes.flatten())
 
             # Rotation curves
-            ax = axes[0,0]
-            for i,g in enumerate(cmp):
-                gdf=cdf[cdf["Galaxy"]==g]
-                ax.plot(gdf["Radius_kpc"],gdf["V_obs_km_s"],color=pal[i%10],lw=1.5,label=g,alpha=.85)
-            ax.set_xlabel("Radius (kpc)"); ax.set_ylabel("V_obs (km/s)")
-            ax.set_title("Observed Rotation Curves"); ax.legend(fontsize=7,**LEG)
+            ax = axes[0, 0]
+            for i, g in enumerate(cmp):
+                gdf = cdf[cdf["Galaxy"] == g]
+                ax.plot(
+                    gdf["Radius_kpc"],
+                    gdf["V_obs_km_s"],
+                    color=cohort_palette[i % len(cohort_palette)],
+                    lw=1.8,
+                    label=g,
+                    alpha=0.9,
+                )
+            ax.set_xlabel("Radius (kpc)")
+            ax.set_ylabel("V_obs (km/s)")
+            ax.set_title("Observed Rotation Velocity Curves")
+            ax.legend(fontsize=7, **LEG)
 
             # V_obs vs V_bar
-            ax2=axes[0,1]
-            for i,g in enumerate(cmp):
-                gdf=cdf[cdf["Galaxy"]==g]
-                ax2.scatter(gdf["V_bar_km_s"],gdf["V_obs_km_s"],color=pal[i%10],s=20,label=g,alpha=.75)
-            vm=cdf[["V_obs_km_s","V_bar_km_s"]].max().max()
-            ax2.plot([0,vm],[0,vm],"w--",lw=.8,alpha=.5,label="V_obs=V_bar")
-            ax2.set_xlabel("V_bar (km/s)"); ax2.set_ylabel("V_obs (km/s)")
-            ax2.set_title("Observed vs Baryonic"); ax2.legend(fontsize=7,**LEG)
+            ax2 = axes[0, 1]
+            for i, g in enumerate(cmp):
+                gdf = cdf[cdf["Galaxy"] == g]
+                ax2.scatter(
+                    gdf["V_bar_km_s"],
+                    gdf["V_obs_km_s"],
+                    color=cohort_palette[i % len(cohort_palette)],
+                    s=22,
+                    label=g,
+                    alpha=0.8,
+                )
+            vm = cdf[["V_obs_km_s", "V_bar_km_s"]].max().max()
+            ax2.plot([0, vm], [0, vm], color="#6E6E66", ls="--", lw=1, label="1:1 Ratio (No DM)")
+            ax2.set_xlabel("V_bar (km/s)")
+            ax2.set_ylabel("V_obs (km/s)")
+            ax2.set_title("Observed vs Baryonic Dynamic Ratio")
+            ax2.legend(fontsize=7, **LEG)
 
             # Residuals
-            ax3=axes[1,0]
-            for i,g in enumerate(cmp):
-                gdf=cdf[cdf["Galaxy"]==g]
-                ax3.plot(gdf["Radius_kpc"],gdf["Velocity_Difference_km_s"],color=pal[i%10],lw=1.5,label=g,alpha=.85)
-            ax3.axhline(0,color="white",ls="--",lw=.8,alpha=.4)
-            ax3.set_xlabel("Radius (kpc)"); ax3.set_ylabel("V_obs−V_bar (km/s)")
-            ax3.set_title("Velocity Residuals"); ax3.legend(fontsize=7,**LEG)
+            ax3 = axes[1, 0]
+            for i, g in enumerate(cmp):
+                gdf = cdf[cdf["Galaxy"] == g]
+                ax3.plot(
+                    gdf["Radius_kpc"],
+                    gdf["Velocity_Difference_km_s"],
+                    color=cohort_palette[i % len(cohort_palette)],
+                    lw=1.8,
+                    label=g,
+                    alpha=0.9,
+                )
+            ax3.axhline(0, color="#6E6E66", ls="--", lw=1)
+            ax3.set_xlabel("Radius (kpc)")
+            ax3.set_ylabel("Velocity Excess ΔV (km/s)")
+            ax3.set_title("Kinematic Excess Profiles")
+            ax3.legend(fontsize=7, **LEG)
 
             # DM fraction bar chart
-            ax4=axes[1,1]
-            names_,fracs_,clrs_ = [],[],[]
-            for i,g in enumerate(cmp):
-                gdf=cdf[cdf["Galaxy"]==g]
-                if gdf.empty: continue
-                lr=gdf.iloc[-1]
-                dm=lr.get("Additional_Mass_Solar",np.nan)
-                f=max((dm/lr["Total_Mass_Solar"]*100) if pd.notna(dm) and lr["Total_Mass_Solar"]>0 else 0,0)
-                names_.append(g); fracs_.append(f); clrs_.append(pal[i%10])
-            bars=ax4.barh(names_,fracs_,color=clrs_,alpha=.85,edgecolor="#0a0a1a")
-            ax4.set_xlabel("DM Fraction (%)"); ax4.set_title("Dark Matter Fraction (outer)")
-            ax4.set_xlim(0,100)
-            for b,v in zip(bars,fracs_):
-                ax4.text(b.get_width()+1,b.get_y()+b.get_height()/2,f"{v:.1f}%",
-                         va="center",ha="left",fontsize=8,color="#e0e0ff")
-            plt.tight_layout(pad=2); st.pyplot(fig); plt.close()
+            ax4 = axes[1, 1]
+            names_, fracs_, clrs_ = [], [], []
+            for i, g in enumerate(cmp):
+                gdf = cdf[cdf["Galaxy"] == g]
+                if gdf.empty:
+                    continue
+                lr = gdf.iloc[-1]
+                dm = lr.get("Additional_Mass_Solar", np.nan)
+                f = max((dm / lr["Total_Mass_Solar"] * 100) if pd.notna(dm) and lr["Total_Mass_Solar"] > 0 else 0, 0)
+                names_.append(g)
+                fracs_.append(f)
+                clrs_.append(cohort_palette[i % len(cohort_palette)])
+            bars = ax4.barh(names_, fracs_, color=clrs_, alpha=0.9, edgecolor="#1E1E1C")
+            ax4.set_xlabel("Outer Dark Matter Ratio (%)")
+            ax4.set_title("Peripheral Halo Dominance Ratio")
+            ax4.set_xlim(0, 100)
+            for b, v in zip(bars, fracs_):
+                ax4.text(
+                    b.get_width() + 1.2,
+                    b.get_y() + b.get_height() / 2,
+                    f"{v:.1f}%",
+                    va="center",
+                    ha="left",
+                    fontsize=8,
+                    color="#D8CBB3",
+                )
+            plt.tight_layout(pad=2.2)
+            st.pyplot(fig)
+            plt.close()
 
-            st.subheader("📋 Summary Table")
-            rows=[]
+            st.markdown("##### Cohort Analytical Summary")
+            rows = []
             for g in cmp:
-                gdf=cdf[cdf["Galaxy"]==g]
-                if gdf.empty: continue
-                rows.append({"Galaxy":g,"Points":len(gdf),
-                             "Max V_obs":gdf["V_obs_km_s"].max(),"Max V_bar":gdf["V_bar_km_s"].max(),
-                             "Mean Residual":gdf["Velocity_Difference_km_s"].mean(),
-                             "Anomalies":int(gdf["Final_Anomaly"].sum())})
-            st.dataframe(pd.DataFrame(rows).style.format(
-                {"Max V_obs":"{:.1f}","Max V_bar":"{:.1f}","Mean Residual":"{:.1f}"}),
-                use_container_width=True)
+                gdf = cdf[cdf["Galaxy"] == g]
+                if gdf.empty:
+                    continue
+                rows.append({
+                    "Galaxy": g,
+                    "Data Points": len(gdf),
+                    "Max V_obs (km/s)": gdf["V_obs_km_s"].max(),
+                    "Max V_bar (km/s)": gdf["V_bar_km_s"].max(),
+                    "Mean ΔV Excess": gdf["Velocity_Difference_km_s"].mean(),
+                    "Anomalies": int(gdf["Final_Anomaly"].sum()),
+                })
+            st.dataframe(
+                pd.DataFrame(rows).style.format(
+                    {"Max V_obs (km/s)": "{:.1f}", "Max V_bar (km/s)": "{:.1f}", "Mean ΔV Excess": "{:.1f}"}
+                ),
+                use_container_width=True,
+            )
         except Exception as e:
-            st.error(f"Error: {e}")
+            st.error(f"Error computing cohort analytics: {e}")
 
 # ══════════════════ TAB 6 — DATASET OVERVIEW ═════════════════════════════════
 with t6:
-    st.header("📋 SPARC Dataset Overview")
+    st.subheader("SPARC Galaxy Survey Global Overview")
     if meta.empty:
-        st.warning("Galaxy metadata not available.")
+        st.warning("Survey metadata table not found.")
     else:
-        oc1,oc2,oc3 = st.columns(3)
-        oc1.metric("Total Galaxies", len(meta))
-        d=pd.to_numeric(meta["D"],errors="coerce").dropna()
+        oc1, oc2, oc3 = st.columns(3)
+        oc1.metric("Catalog Size", f"{len(meta)} Galaxies")
+        d = pd.to_numeric(meta["D"], errors="coerce").dropna()
         oc2.metric("Distance Range", f"{d.min():.1f} – {d.max():.1f} Mpc")
-        oc3.metric("Avg Inclination",f"{pd.to_numeric(meta['Inc'],errors='coerce').mean():.1f}°")
+        oc3.metric("Mean Inclination Angle", f"{pd.to_numeric(meta['Inc'], errors='coerce').mean():.1f}°")
 
-        fig,axes=plt.subplots(2,2,figsize=(14,9)); _dark(fig,axes.flatten())
+        fig, axes = plt.subplots(2, 2, figsize=(14, 9))
+        _dark(fig, axes.flatten())
 
-        d.hist(ax=axes[0,0],bins=25,color=COLORS["obs"],edgecolor="#0a0a1a",alpha=.85)
-        axes[0,0].set_xlabel("Distance (Mpc)"); axes[0,0].set_ylabel("Count")
-        axes[0,0].set_title("Galaxy Distance Distribution")
+        d.hist(ax=axes[0, 0], bins=24, color=COLORS["obs"], edgecolor="#1E1E1C", alpha=0.9)
+        axes[0, 0].set_xlabel("Distance (Mpc)")
+        axes[0, 0].set_ylabel("Galaxy Count")
+        axes[0, 0].set_title("Distance Distribution")
 
-        vf=pd.to_numeric(meta["Vflat"],errors="coerce").replace(0,np.nan).dropna()
-        vf.hist(ax=axes[0,1],bins=25,color=COLORS["bar"],edgecolor="#0a0a1a",alpha=.85)
-        axes[0,1].set_xlabel("V_flat (km/s)"); axes[0,1].set_ylabel("Count")
-        axes[0,1].set_title("V_flat Distribution")
+        vf = pd.to_numeric(meta["Vflat"], errors="coerce").replace(0, np.nan).dropna()
+        vf.hist(ax=axes[0, 1], bins=24, color=COLORS["bar"], edgecolor="#1E1E1C", alpha=0.9)
+        axes[0, 1].set_xlabel("Flat Rotation Velocity (km/s)")
+        axes[0, 1].set_ylabel("Galaxy Count")
+        axes[0, 1].set_title("V_flat Characteristic Velocity Distribution")
 
-        t_=pd.to_numeric(meta["T"],errors="coerce").dropna().value_counts().sort_index()
-        axes[1,0].bar(t_.index,t_.values,color=COLORS["gas"],alpha=.85,edgecolor="#0a0a1a")
-        axes[1,0].set_xlabel("Morphological Type (T)"); axes[1,0].set_ylabel("Count")
-        axes[1,0].set_title("Morphological Type Distribution")
+        t_ = pd.to_numeric(meta["T"], errors="coerce").dropna().value_counts().sort_index()
+        axes[1, 0].bar(t_.index, t_.values, color=COLORS["gas"], alpha=0.9, edgecolor="#1E1E1C")
+        axes[1, 0].set_xlabel("Hubble Morphological Stage (T)")
+        axes[1, 0].set_ylabel("Galaxy Count")
+        axes[1, 0].set_title("Morphological Classification")
 
-        v=meta[["D","Vflat","T"]].copy()
-        for col in ["D","Vflat","T"]:
-            v[col]=pd.to_numeric(v[col],errors="coerce")
-        v["Vflat"]=v["Vflat"].replace(0,np.nan); v=v.dropna()
-        sc=axes[1,1].scatter(v["D"],v["Vflat"],c=v["T"],cmap="plasma",s=30,alpha=.8)
-        plt.colorbar(sc,ax=axes[1,1],label="Type (T)")
-        axes[1,1].set_xlabel("Distance (Mpc)"); axes[1,1].set_ylabel("V_flat (km/s)")
-        axes[1,1].set_title("Distance vs V_flat")
-        plt.tight_layout(pad=2); st.pyplot(fig); plt.close()
+        v = meta[["D", "Vflat", "T"]].copy()
+        for col in ["D", "Vflat", "T"]:
+            v[col] = pd.to_numeric(v[col], errors="coerce")
+        v["Vflat"] = v["Vflat"].replace(0, np.nan)
+        v = v.dropna()
+        sc = axes[1, 1].scatter(
+            v["D"],
+            v["Vflat"],
+            c=v["T"],
+            cmap="copper",
+            s=32,
+            alpha=0.9,
+            edgecolors="#1E1E1C",
+        )
+        cbar = plt.colorbar(sc, ax=axes[1, 1])
+        cbar.set_label("Hubble Type (T)", color="#D8CBB3")
+        cbar.ax.yaxis.set_tick_params(color="#D8CBB3")
+        plt.setp(plt.getp(cbar.ax.axes, "yticklabels"), color="#D8CBB3")
+        axes[1, 1].set_xlabel("Distance (Mpc)")
+        axes[1, 1].set_ylabel("V_flat (km/s)")
+        axes[1, 1].set_title("Distance vs Characteristic Rotational Velocity")
+        plt.tight_layout(pad=2.2)
+        st.pyplot(fig)
+        plt.close()
 
-        with st.expander("🗂️ Full Metadata Table"):
-            st.dataframe(meta,use_container_width=True)
+        with st.expander("View Complete SPARC Catalog Metadata"):
+            st.dataframe(meta, use_container_width=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # FOOTER
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("---")
 st.markdown("""
-<div style='text-align:center;color:#506e8a;font-size:.85em;padding:10px 0'>
-<b>DARKVERSE</b> — An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform<br>
-Data: SPARC (Lelli et al. 2016) · Person 1: Data Pipeline · Person 2: Analysis · Person 3: Dashboard
-</div>""", unsafe_allow_html=True)
+<div style='text-align: center; color: #8F8778; font-size: 0.85rem; padding: 12px 0;'>
+    <b>DARKVERSE</b> — An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform<br>
+    Observational Data: SPARC (Lelli et al. 2016) · Architecture: 70% Charcoal (#1E1E1C) &amp; 30% Sand (#D8CBB3)
+</div>
+""", unsafe_allow_html=True)

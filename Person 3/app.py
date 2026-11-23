@@ -17,3 +17,4 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "Darkverse"))
 
 # Re-export the full dashboard app
 exec(open(os.path.join(os.path.dirname(__file__), "..", "Darkverse", "app.py")).read())
+

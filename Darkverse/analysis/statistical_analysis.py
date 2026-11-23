@@ -30,3 +30,4 @@ def generate_statistical_report(df):
             "Correlation_Analysis": calculate_correlation(df),
             "Galaxy_Wise_Statistics": analyze_galaxy_statistics(df),
             "Velocity_Statistics": calculate_velocity_statistics(df)}
+

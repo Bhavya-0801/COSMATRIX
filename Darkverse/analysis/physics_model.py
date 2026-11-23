@@ -26,3 +26,4 @@ def calculate_additional_velocity(v_obs, v_bar):
     if v_obs >= v_bar:
         return (v_obs**2 - v_bar**2) ** 0.5
     return None
+

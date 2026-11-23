@@ -25,3 +25,4 @@ def estimate_galaxy_mass(df):
     df["Baryonic_Mass_Solar"]   = df.apply(lambda r: calculate_baryonic_mass(r["Radius_kpc"], r["V_bar_km_s"]), axis=1)
     df["Additional_Mass_Solar"] = df.apply(lambda r: calculate_dark_matter_mass(r["Radius_kpc"], r["V_obs_km_s"], r["V_bar_km_s"]), axis=1)
     return df
+

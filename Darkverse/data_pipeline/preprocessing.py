@@ -26,3 +26,4 @@ def validate_rotation_data(df):
     if "errV" in df and (df["errV"] < 0).any(): warns.append("Negative uncertainties found.")
     if "Rad" in df and not df["Rad"].is_monotonic_increasing: warns.append("Radius not sorted.")
     return warns
+

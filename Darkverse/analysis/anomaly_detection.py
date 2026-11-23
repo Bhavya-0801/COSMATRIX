@@ -35,3 +35,4 @@ def analyze_anomalies(df):
     df["Anomaly_Count"] = df["Zscore_Anomaly"].astype(int) + df["IQR_Anomaly"].astype(int)
     df["Final_Anomaly"]  = df["Anomaly_Count"] == 2
     return df
+

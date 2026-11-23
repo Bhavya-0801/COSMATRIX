@@ -26,3 +26,4 @@ def load_galaxy_with_metadata(galaxy_name):
     if match.empty: raise ValueError(f"Galaxy not found: {galaxy_name}")
     rot = load_processed_galaxy(f"{galaxy_name}_rotmod_cleaned.csv")
     return rot, match.iloc[0]
+

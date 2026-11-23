@@ -45,3 +45,4 @@ def load_multiple_galaxies(galaxy_names: list) -> pd.DataFrame:
     if not frames:
         raise ValueError("No galaxy data loaded")
     return pd.concat(frames, ignore_index=True)
+

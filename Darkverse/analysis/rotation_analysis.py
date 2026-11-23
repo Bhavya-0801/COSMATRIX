@@ -29,3 +29,4 @@ def analyze_galaxy(df, galaxy_name):
     gdf = calculate_velocity_difference(gdf)
     gdf = calculate_percentage_difference(gdf)
     return gdf
+
