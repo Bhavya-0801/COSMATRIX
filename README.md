@@ -9,10 +9,13 @@ The platform analyzes galaxy rotation curves, contrasts observed rotational velo
 
 ## 🎨 Design System
 
-Designed under the **80/15/5 Principle**:
-- **80% Black (`#000000`)**: Deep matte cosmic canvas, low-glare surface backgrounds, and high-contrast space.
-- **15% White (`#FFFFFF`)**: High-legibility typography, primary observational data curves, and metric values.
-- **5% Cobalt Blue (`#2C3480`)**: Accent highlights, primary actions, and baryonic velocity indicators.
+**Deep Cosmic Obsidian & Celestial Starlight**:
+- **Canvas (`#0A0D14`)**: Deep midnight space obsidian backdrop with subtle celestial nebular dust.
+- **Tiles & Panels (`#10141E`)**: Elevated frosted midnight glass with micro-borders (`#1E2638`).
+- **Typography (`#F8FAFC`)**: Luminescent white headers and numerical values for pristine readability.
+- **Electric Cyan (`#38BDF8`)**: Primary instrument accent, observed rotation curve points and key actions.
+- **Nebula Violet (`#A78BFA`)**: Baryonic visible-matter theoretical profiles.
+- **Muted Starlight (`#94A3B8`)**: Secondary labels, units, and axis metadata.
 
 ---
 
