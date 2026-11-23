@@ -1,19 +1,17 @@
 """
-DARKVERSE — Interactive Dashboard (Person 3)
-Fully integrated Streamlit app connecting Person 1 & Person 2 modules.
-Theme: Charcoal (#1E1E1C) & Sand (#D8CBB3) - 70/30 Rule, Realistic Micro-interactions.
+COSMATRIX — Interactive Galactic Behaviour Analytics Platform
+Contributors:
+  - Purva: SPARC Data Collection, Ingestion & Preprocessing Pipeline
+  - Suyash: Kinematic & Physics-based Mathematical Modeling Modules
+  - Bhavya: Unified Data Bridge & Interactive Streamlit Analytics Dashboard
 
-Deploy on Streamlit Community Cloud:
-  Main file path: Darkverse/app.py
-
-Run locally:
-  streamlit run app.py
+Theme: 80% Black (#000000), 15% White (#FFFFFF), 5% Cobalt Blue (#2C3480)
 """
 
 import sys
 from pathlib import Path
 
-# ── Make sure sibling packages are importable when running from repo root ──
+# ── Ensure local sibling modules are importable ──
 _HERE = Path(__file__).resolve().parent
 if str(_HERE) not in sys.path:
     sys.path.insert(0, str(_HERE))
@@ -26,7 +24,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# ── DARKVERSE modules ─────────────────────────────────────────────────────────
+# ── COSMATRIX modules ─────────────────────────────────────────────────────────
 from data_bridge import (
     list_available_galaxies,
     load_galaxy_for_analysis,
@@ -50,52 +48,52 @@ from analysis.anomaly_detection import analyze_anomalies
 # PAGE CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="DARKVERSE — Galaxy Analytics",
+    page_title="COSMATRIX — Galactic Analytics",
     page_icon="🌌",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# CHARCOAL (#1E1E1C) & SAND (#D8CBB3) THEME — 70/30 ARCHITECTURE
-# No gradients, solid matte surfaces, realistic micro-interactions
+# 80/15/5 THEME: 80% Black (#000000), 15% White (#FFFFFF), 5% Cobalt Blue (#2C3480)
+# Clean, modern, scientific instrument aesthetic with physical micro-interactions
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-/* CSS Reset & Global Baseline: 70% Charcoal Base */
+/* 80% Black Baseline: Solid deep black surfaces */
 .stApp {
-    background-color: #1E1E1C !important;
-    color: #E8E2D6 !important;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Sidebar: Solid Deep Charcoal with Sand Accents */
+/* Sidebar: 80% Black depth with subtle cobalt division */
 [data-testid="stSidebar"] {
-    background-color: #181816 !important;
-    border-right: 1px solid #33332F !important;
+    background-color: #050505 !important;
+    border-right: 1px solid #161622 !important;
 }
 
 [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
 [data-testid="stSidebar"] label {
-    color: #BFB6A4 !important;
+    color: #CCCCCC !important;
 }
 
-/* Typography: 30% Sand Accents */
+/* 15% White Typography & Contrast Elements */
 h1, h2, h3, h4, h5, h6 {
-    color: #D8CBB3 !important;
+    color: #FFFFFF !important;
     font-weight: 600 !important;
-    letter-spacing: -0.01em !important;
+    letter-spacing: -0.015em !important;
 }
 
 p, span, div {
-    color: #E8E2D6;
+    color: #EEEEEE;
 }
 
-/* Realistic Micro-Interaction Animations */
-@keyframes subtleEntrance {
+/* Subtle Realistic Micro-Interaction Animations */
+@keyframes entranceFade {
     0% {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(5px);
     }
     100% {
         opacity: 1;
@@ -104,50 +102,51 @@ p, span, div {
 }
 
 .stMetric, .stAlert, [data-testid="stExpander"], div[data-testid="stPlotlyChart"], .element-container {
-    animation: subtleEntrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: entranceFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Metric Cards: Charcoal Surface (#262624) + Sand Highlighting (#D8CBB3) */
+/* Metric Cards: Black surface (#0C0C0E) + 5% Cobalt Top Accent (#2C3480) */
 [data-testid="metric-container"] {
-    background-color: #262624 !important;
-    border: 1px solid #383834 !important;
+    background-color: #0C0C0E !important;
+    border: 1px solid #1C1C24 !important;
+    border-top: 2px solid #2C3480 !important;
     border-radius: 6px !important;
     padding: 14px 18px !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6) !important;
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 [data-testid="metric-container"]:hover {
     transform: translateY(-2px);
-    border-color: #D8CBB3 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+    border-color: #2C3480 !important;
+    box-shadow: 0 4px 16px rgba(44, 52, 128, 0.25) !important;
 }
 
 [data-testid="metric-container"] [data-testid="stMetricLabel"] {
-    color: #A8A090 !important;
-    font-size: 0.82rem !important;
+    color: #AAAAAA !important;
+    font-size: 0.8rem !important;
     font-weight: 500 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
 }
 
 [data-testid="metric-container"] [data-testid="stMetricValue"] {
-    color: #D8CBB3 !important;
-    font-size: 1.6rem !important;
+    color: #FFFFFF !important;
+    font-size: 1.65rem !important;
     font-weight: 700 !important;
 }
 
-/* Tab Navigation: Precision Engineered Sand Accents */
+/* Tab Navigation: Black with Cobalt (#2C3480) Active Indicator */
 .stTabs [data-baseweb="tab-list"] {
-    background-color: #262624 !important;
-    border: 1px solid #33332F !important;
+    background-color: #0C0C0E !important;
+    border: 1px solid #1C1C24 !important;
     border-radius: 6px !important;
     padding: 4px !important;
-    gap: 2px !important;
+    gap: 3px !important;
 }
 
 .stTabs [data-baseweb="tab"] {
-    color: #A8A090 !important;
+    color: #888888 !important;
     background-color: transparent !important;
     border: none !important;
     border-radius: 4px !important;
@@ -158,56 +157,57 @@ p, span, div {
 }
 
 .stTabs [data-baseweb="tab"]:hover {
-    color: #E8E2D6 !important;
-    background-color: #2D2D2A !important;
+    color: #FFFFFF !important;
+    background-color: #161620 !important;
 }
 
 .stTabs [aria-selected="true"] {
-    background-color: #383834 !important;
-    color: #D8CBB3 !important;
+    background-color: #2C3480 !important;
+    color: #FFFFFF !important;
     font-weight: 600 !important;
 }
 
-/* Buttons: Matte Charcoal with Sand Border/Text */
+/* 5% Cobalt Blue Interactive Buttons */
 .stButton > button {
-    background-color: #262624 !important;
-    color: #D8CBB3 !important;
-    border: 1px solid #484842 !important;
+    background-color: #2C3480 !important;
+    color: #FFFFFF !important;
+    border: 1px solid #3B46A3 !important;
     border-radius: 5px !important;
-    padding: 6px 16px !important;
+    padding: 7px 18px !important;
     font-weight: 500 !important;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease !important;
 }
 
 .stButton > button:hover {
-    background-color: #33332F !important;
-    border-color: #D8CBB3 !important;
+    background-color: #38429C !important;
+    border-color: #505ECC !important;
     color: #FFFFFF !important;
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44, 52, 128, 0.4) !important;
 }
 
 .stButton > button:active {
     transform: translateY(0);
 }
 
-/* Selectbox and Inputs */
+/* Selectbox and Input Surfaces */
 div[data-baseweb="select"] > div {
-    background-color: #262624 !important;
-    border: 1px solid #383834 !important;
+    background-color: #0C0C0E !important;
+    border: 1px solid #20202C !important;
     border-radius: 5px !important;
-    color: #E8E2D6 !important;
+    color: #FFFFFF !important;
     transition: border-color 0.2s ease !important;
 }
 
 div[data-baseweb="select"] > div:hover,
 div[data-baseweb="select"] > div:focus-within {
-    border-color: #D8CBB3 !important;
+    border-color: #2C3480 !important;
 }
 
-/* Data Table Styling */
+/* Data Table Container */
 div[data-testid="stDataFrame"] {
-    background-color: #262624 !important;
-    border: 1px solid #33332F !important;
+    background-color: #0C0C0E !important;
+    border: 1px solid #1C1C24 !important;
     border-radius: 6px !important;
 }
 
@@ -215,53 +215,54 @@ div[data-testid="stDataFrame"] {
 hr {
     border: 0 !important;
     height: 1px !important;
-    background-color: #33332F !important;
+    background-color: #1C1C24 !important;
     margin: 20px 0 !important;
 }
 
 /* Alerts / Expanders */
 .stAlert {
-    background-color: #262624 !important;
-    border: 1px solid #3E3E38 !important;
-    color: #E8E2D6 !important;
+    background-color: #0C0C0E !important;
+    border: 1px solid #20202C !important;
+    color: #EEEEEE !important;
     border-radius: 6px !important;
 }
+
 [data-testid="stExpander"] {
-    background-color: #262624 !important;
-    border: 1px solid #33332F !important;
+    background-color: #0C0C0E !important;
+    border: 1px solid #1C1C24 !important;
     border-radius: 6px !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SCIENTIFIC PLOTTING PALETTE — Charcoal Backgrounds, Sand Highlighting
+# SCIENTIFIC PLOT COLOR PALETTE: Black Canvas, White Elements, Cobalt Accents
 # ─────────────────────────────────────────────────────────────────────────────
 COLORS = dict(
-    obs="#D8CBB3",       # Primary Sand (Observed velocity)
-    bar="#C48E66",       # Terracotta Sand (Baryonic velocity)
-    gas="#7D9D8B",       # Muted Sage Slate (Gas component)
-    disk="#D9B48F",      # Light Sand (Disk component)
-    bulge="#9C8E7E",     # Warm Taupe (Bulge component)
-    dark="#E09E60",      # Amber Sand (Dark matter mass proxy)
-    anomaly="#C85A3C",   # Scientific Vermilion (Anomalies)
+    obs="#FFFFFF",        # White (Observed rotational velocity)
+    bar="#3E4AB8",        # Cobalt Blue Accent (Baryonic visible matter)
+    gas="#7E8BA8",        # Muted Slate Blue (Gas component)
+    disk="#B0C2DE",       # Light Ice Blue (Stellar disk)
+    bulge="#9DA8BA",      # Cool Taupe (Bulge component)
+    dark="#4A56C4",       # Vivid Cobalt Light (Dark matter halo proxy)
+    anomaly="#E84A5F",    # Vermilion Red (Kinematic anomalies)
 )
 
-def _dark(fig, axes):
-    """Applies authentic scientific charcoal styling with sand accents to plots."""
-    fig.patch.set_facecolor("#1E1E1C")
+def _black_theme(fig, axes):
+    """Styles matplotlib plots with 80% Black canvas, White typography, and subtle cobalt borders."""
+    fig.patch.set_facecolor("#000000")
     for ax in (axes if hasattr(axes, "__iter__") else [axes]):
-        ax.set_facecolor("#262624")
-        ax.tick_params(colors="#D8CBB3", labelsize=9)
-        ax.xaxis.label.set_color("#D8CBB3")
-        ax.yaxis.label.set_color("#D8CBB3")
-        ax.title.set_color("#D8CBB3")
+        ax.set_facecolor("#0A0A0D")
+        ax.tick_params(colors="#DDDDDD", labelsize=9)
+        ax.xaxis.label.set_color("#FFFFFF")
+        ax.yaxis.label.set_color("#FFFFFF")
+        ax.title.set_color("#FFFFFF")
         for s in ax.spines.values():
-            s.set_edgecolor("#383834")
+            s.set_edgecolor("#20202C")
             s.set_linewidth(1.0)
-        ax.grid(True, color="#383834", alpha=0.5, linestyle="--", linewidth=0.7)
+        ax.grid(True, color="#1A1A24", alpha=0.6, linestyle="--", linewidth=0.7)
 
-LEG = dict(facecolor="#262624", edgecolor="#383834", labelcolor="#D8CBB3")
+LEG = dict(facecolor="#0A0A0D", edgecolor="#20202C", labelcolor="#FFFFFF")
 
 @st.cache_data
 def _galaxies():
@@ -307,7 +308,7 @@ glist = _galaxies()
 meta = _meta()
 
 with st.sidebar:
-    st.markdown("## 🌌 DARKVERSE")
+    st.markdown("## 🌌 COSMATRIX")
     st.caption("Dark Matter & Galactic Dynamics Analytics Platform")
     st.markdown("---")
     st.markdown(f"**Dataset:** {len(glist)} SPARC Galaxies")
@@ -341,19 +342,19 @@ with st.sidebar:
     )
     st.markdown("---")
     st.caption(
-        "Scientific Pipeline:\n"
-        "• Person 1: SPARC Ingestion & Cleaning\n"
-        "• Person 2: Kinematic & Physics Analytics\n"
-        "• Person 3: Data Bridge & Interactive Dashboard"
+        "Project Contributors:\n"
+        "• Purva: SPARC Data Collection & Preprocessing\n"
+        "• Suyash: Physics Models & Kinematic Analytics\n"
+        "• Bhavya: Data Bridge & Interactive Dashboard"
     )
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HEADER
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
-<div style='padding: 10px 0 16px;'>
-    <h1 style='font-size: 2.4rem; margin-bottom: 4px;'>DARKVERSE</h1>
-    <p style='color: #D8CBB3; font-size: 1.05rem; margin-top: 0;'>
+<div style='padding: 8px 0 16px;'>
+    <h1 style='font-size: 2.4rem; margin-bottom: 4px; color: #FFFFFF;'>COSMATRIX</h1>
+    <p style='color: #CCCCCC; font-size: 1.05rem; margin-top: 0;'>
         An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform
     </p>
 </div>
@@ -410,7 +411,7 @@ with t1:
                 m4.metric("Hubble Stage (T)", f"{int(gm['T'])}" if pd.notna(gm.get("T")) else "N/A")
 
         fig, axes = plt.subplots(1, 2, figsize=(14, 5.2))
-        _dark(fig, axes)
+        _black_theme(fig, axes)
 
         if anom_mode == "Both (Z-score & IQR)":
             amask = df["Final_Anomaly"]
@@ -435,7 +436,7 @@ with t1:
                 capsize=3,
                 label="Observed Velocity (V_obs)",
                 markersize=4.5,
-                alpha=0.9,
+                alpha=0.95,
             )
         else:
             ax.scatter(
@@ -444,7 +445,7 @@ with t1:
                 color=COLORS["obs"],
                 label="Observed Velocity (V_obs)",
                 s=28,
-                alpha=0.9,
+                alpha=0.95,
             )
         ax.plot(
             df["Radius_kpc"],
@@ -499,11 +500,11 @@ with t1:
 
         # Right: Velocity Residual (Dark Matter Signature)
         ax2 = axes[1]
-        ax2.axhline(0, color="#6E6E66", lw=1.0, ls="--")
+        ax2.axhline(0, color="#666677", lw=1.0, ls="--")
         ax2.scatter(
             df["Radius_kpc"],
             df["Velocity_Difference_km_s"],
-            color=COLORS["obs"],
+            color=COLORS["bar"],
             s=28,
             alpha=0.85,
             label="Residual ΔV (V_obs − V_bar)",
@@ -511,8 +512,8 @@ with t1:
         ax2.fill_between(
             df["Radius_kpc"],
             df["Velocity_Difference_km_s"],
-            alpha=0.15,
-            color=COLORS["obs"],
+            alpha=0.2,
+            color=COLORS["bar"],
         )
         ax2.set_xlabel("Galactocentric Radius (kpc)")
         ax2.set_ylabel("Velocity Excess ΔV (km/s)")
@@ -541,7 +542,7 @@ with t2:
     try:
         df = _analyse(sel)
         fig, axes = plt.subplots(1, 2, figsize=(14, 5.2))
-        _dark(fig, axes)
+        _black_theme(fig, axes)
 
         ax = axes[0]
         ax.plot(
@@ -570,7 +571,7 @@ with t2:
         ax.fill_between(
             df.loc[dm.index, "Radius_kpc"],
             dm / 1e10,
-            alpha=0.15,
+            alpha=0.2,
             color=COLORS["dark"],
         )
         ax.set_xlabel("Radius (kpc)")
@@ -581,7 +582,7 @@ with t2:
         ax2 = axes[1]
         frac = (df["Additional_Mass_Solar"].fillna(0) / df["Total_Mass_Solar"] * 100).clip(0, 100)
         ax2.plot(df["Radius_kpc"], frac, color=COLORS["dark"], lw=2.2, label="Dark Matter Ratio")
-        ax2.fill_between(df["Radius_kpc"], frac, alpha=0.2, color=COLORS["dark"])
+        ax2.fill_between(df["Radius_kpc"], frac, alpha=0.25, color=COLORS["dark"])
         ax2.set_xlabel("Radius (kpc)")
         ax2.set_ylabel("Dark Matter Ratio (%)")
         ax2.set_title(f"Dark Matter Fraction Radial Gradient — {sel}")
@@ -647,17 +648,17 @@ with t3:
         with cb:
             st.markdown("##### Correlation Matrix")
             fig, ax = plt.subplots(figsize=(6, 4))
-            _dark(fig, ax)
+            _black_theme(fig, ax)
             sns.heatmap(
                 corr,
                 annot=True,
                 fmt=".2f",
-                cmap="copper",
+                cmap="mako",
                 ax=ax,
                 linewidths=0.5,
-                linecolor="#383834",
+                linecolor="#1C1C24",
                 cbar_kws={"shrink": 0.8},
-                annot_kws={"size": 8, "color": "#E8E2D6"},
+                annot_kws={"size": 8, "color": "#FFFFFF"},
             )
             ax.set_title(f"Parameter Correlation — {sel}", pad=10)
             plt.tight_layout()
@@ -666,14 +667,14 @@ with t3:
 
         st.markdown("##### Empirical Velocity Distributions")
         fig2, axes2 = plt.subplots(1, 3, figsize=(14, 4))
-        _dark(fig2, axes2)
+        _black_theme(fig2, axes2)
         for ax_, col_, clr_, lbl_ in zip(
             axes2,
             ["V_obs_km_s", "V_bar_km_s", "Velocity_Difference_km_s"],
             [COLORS["obs"], COLORS["bar"], COLORS["dark"]],
             ["V_obs (km/s)", "V_bar (km/s)", "Residual ΔV (km/s)"],
         ):
-            ax_.hist(df[col_].dropna(), bins=14, color=clr_, alpha=0.85, edgecolor="#1E1E1C")
+            ax_.hist(df[col_].dropna(), bins=14, color=clr_, alpha=0.85, edgecolor="#000000")
             ax_.axvline(df[col_].mean(), color="#FFFFFF", ls="--", lw=1.2, label="Mean")
             ax_.set_xlabel(lbl_)
             ax_.set_ylabel("Frequency")
@@ -701,7 +702,7 @@ with t4:
         a4.metric("Confirmed Dual Anomalies", fc, delta=f"{fc/tot*100:.1f}%", delta_color="inverse")
 
         fig, axes = plt.subplots(1, 2, figsize=(14, 5.2))
-        _dark(fig, axes)
+        _black_theme(fig, axes)
 
         # Z-Score
         ax = axes[0]
@@ -709,9 +710,9 @@ with t4:
         ax.scatter(
             df.loc[nm, "Radius_kpc"],
             df.loc[nm, "Z_Score"],
-            color=COLORS["obs"],
+            color=COLORS["bar"],
             s=28,
-            alpha=0.8,
+            alpha=0.85,
             label="In-Distribution Data",
         )
         if df["Zscore_Anomaly"].any():
@@ -725,8 +726,8 @@ with t4:
                 zorder=5,
                 label=f"Z-Score Outlier (|Z| > 3)",
             )
-        ax.axhline(3, color="#D8CBB3", ls="--", lw=1, label="+3σ Limit")
-        ax.axhline(-3, color="#D8CBB3", ls="--", lw=1, label="−3σ Limit")
+        ax.axhline(3, color="#FFFFFF", ls="--", lw=1, label="+3σ Limit")
+        ax.axhline(-3, color="#FFFFFF", ls="--", lw=1, label="−3σ Limit")
         ax.set_xlabel("Radius (kpc)")
         ax.set_ylabel("Standardized Z-Score")
         ax.set_title(f"Standardized Residual Dispersion — {sel}")
@@ -742,9 +743,9 @@ with t4:
         ax2.scatter(
             df.loc[nm2, "Radius_kpc"],
             r[nm2],
-            color=COLORS["obs"],
+            color=COLORS["bar"],
             s=28,
-            alpha=0.8,
+            alpha=0.85,
             label="Quartile Inliers",
         )
         if df["IQR_Anomaly"].any():
@@ -758,8 +759,8 @@ with t4:
                 zorder=5,
                 label=f"Tukey Outliers ({ic})",
             )
-        ax2.axhline(ub, color="#D8CBB3", ls="--", lw=1, label=f"Upper Bound ({ub:.1f})")
-        ax2.axhline(lb, color="#D8CBB3", ls=":", lw=1, label=f"Lower Bound ({lb:.1f})")
+        ax2.axhline(ub, color="#FFFFFF", ls="--", lw=1, label=f"Upper Bound ({ub:.1f})")
+        ax2.axhline(lb, color="#FFFFFF", ls=":", lw=1, label=f"Lower Bound ({lb:.1f})")
         ax2.set_xlabel("Radius (kpc)")
         ax2.set_ylabel("Residual ΔV (km/s)")
         ax2.set_title(f"Interquartile Range Bounds — {sel}")
@@ -797,9 +798,9 @@ with t5:
     else:
         try:
             cdf = _multi(tuple(cmp))
-            cohort_palette = ["#D8CBB3", "#C48E66", "#7D9D8B", "#D9B48F", "#9C8E7E", "#E09E60", "#B3A58C", "#E2D3B8"]
+            cohort_palette = ["#FFFFFF", "#3E4AB8", "#7E8BA8", "#B0C2DE", "#505ECC", "#8E9BC4", "#A4B1D6", "#323B99"]
             fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-            _dark(fig, axes.flatten())
+            _black_theme(fig, axes.flatten())
 
             # Rotation curves
             ax = axes[0, 0]
@@ -828,10 +829,10 @@ with t5:
                     color=cohort_palette[i % len(cohort_palette)],
                     s=22,
                     label=g,
-                    alpha=0.8,
+                    alpha=0.85,
                 )
             vm = cdf[["V_obs_km_s", "V_bar_km_s"]].max().max()
-            ax2.plot([0, vm], [0, vm], color="#6E6E66", ls="--", lw=1, label="1:1 Ratio (No DM)")
+            ax2.plot([0, vm], [0, vm], color="#666677", ls="--", lw=1, label="1:1 Ratio (No DM)")
             ax2.set_xlabel("V_bar (km/s)")
             ax2.set_ylabel("V_obs (km/s)")
             ax2.set_title("Observed vs Baryonic Dynamic Ratio")
@@ -849,7 +850,7 @@ with t5:
                     label=g,
                     alpha=0.9,
                 )
-            ax3.axhline(0, color="#6E6E66", ls="--", lw=1)
+            ax3.axhline(0, color="#666677", ls="--", lw=1)
             ax3.set_xlabel("Radius (kpc)")
             ax3.set_ylabel("Velocity Excess ΔV (km/s)")
             ax3.set_title("Kinematic Excess Profiles")
@@ -868,7 +869,7 @@ with t5:
                 names_.append(g)
                 fracs_.append(f)
                 clrs_.append(cohort_palette[i % len(cohort_palette)])
-            bars = ax4.barh(names_, fracs_, color=clrs_, alpha=0.9, edgecolor="#1E1E1C")
+            bars = ax4.barh(names_, fracs_, color=clrs_, alpha=0.9, edgecolor="#000000")
             ax4.set_xlabel("Outer Dark Matter Ratio (%)")
             ax4.set_title("Peripheral Halo Dominance Ratio")
             ax4.set_xlim(0, 100)
@@ -880,7 +881,7 @@ with t5:
                     va="center",
                     ha="left",
                     fontsize=8,
-                    color="#D8CBB3",
+                    color="#FFFFFF",
                 )
             plt.tight_layout(pad=2.2)
             st.pyplot(fig)
@@ -922,21 +923,21 @@ with t6:
         oc3.metric("Mean Inclination Angle", f"{pd.to_numeric(meta['Inc'], errors='coerce').mean():.1f}°")
 
         fig, axes = plt.subplots(2, 2, figsize=(14, 9))
-        _dark(fig, axes.flatten())
+        _black_theme(fig, axes.flatten())
 
-        d.hist(ax=axes[0, 0], bins=24, color=COLORS["obs"], edgecolor="#1E1E1C", alpha=0.9)
+        d.hist(ax=axes[0, 0], bins=24, color=COLORS["bar"], edgecolor="#000000", alpha=0.9)
         axes[0, 0].set_xlabel("Distance (Mpc)")
         axes[0, 0].set_ylabel("Galaxy Count")
         axes[0, 0].set_title("Distance Distribution")
 
         vf = pd.to_numeric(meta["Vflat"], errors="coerce").replace(0, np.nan).dropna()
-        vf.hist(ax=axes[0, 1], bins=24, color=COLORS["bar"], edgecolor="#1E1E1C", alpha=0.9)
+        vf.hist(ax=axes[0, 1], bins=24, color=COLORS["obs"], edgecolor="#000000", alpha=0.9)
         axes[0, 1].set_xlabel("Flat Rotation Velocity (km/s)")
         axes[0, 1].set_ylabel("Galaxy Count")
         axes[0, 1].set_title("V_flat Characteristic Velocity Distribution")
 
         t_ = pd.to_numeric(meta["T"], errors="coerce").dropna().value_counts().sort_index()
-        axes[1, 0].bar(t_.index, t_.values, color=COLORS["gas"], alpha=0.9, edgecolor="#1E1E1C")
+        axes[1, 0].bar(t_.index, t_.values, color=COLORS["dark"], alpha=0.9, edgecolor="#000000")
         axes[1, 0].set_xlabel("Hubble Morphological Stage (T)")
         axes[1, 0].set_ylabel("Galaxy Count")
         axes[1, 0].set_title("Morphological Classification")
@@ -950,15 +951,15 @@ with t6:
             v["D"],
             v["Vflat"],
             c=v["T"],
-            cmap="copper",
+            cmap="Blues_r",
             s=32,
             alpha=0.9,
-            edgecolors="#1E1E1C",
+            edgecolors="#000000",
         )
         cbar = plt.colorbar(sc, ax=axes[1, 1])
-        cbar.set_label("Hubble Type (T)", color="#D8CBB3")
-        cbar.ax.yaxis.set_tick_params(color="#D8CBB3")
-        plt.setp(plt.getp(cbar.ax.axes, "yticklabels"), color="#D8CBB3")
+        cbar.set_label("Hubble Type (T)", color="#FFFFFF")
+        cbar.ax.yaxis.set_tick_params(color="#FFFFFF")
+        plt.setp(plt.getp(cbar.ax.axes, "yticklabels"), color="#FFFFFF")
         axes[1, 1].set_xlabel("Distance (Mpc)")
         axes[1, 1].set_ylabel("V_flat (km/s)")
         axes[1, 1].set_title("Distance vs Characteristic Rotational Velocity")
@@ -974,8 +975,9 @@ with t6:
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("---")
 st.markdown("""
-<div style='text-align: center; color: #8F8778; font-size: 0.85rem; padding: 12px 0;'>
-    <b>DARKVERSE</b> — An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform<br>
-    Observational Data: SPARC (Lelli et al. 2016) · Architecture: 70% Charcoal (#1E1E1C) &amp; 30% Sand (#D8CBB3)
+<div style='text-align: center; color: #888899; font-size: 0.85rem; padding: 12px 0;'>
+    <b>COSMATRIX</b> — An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform<br>
+    Observational Data: SPARC (Lelli et al. 2016) · Theme: Black (#000000) 80%, White (#FFFFFF) 15%, Cobalt Blue (#2C3480) 5%<br>
+    Purva (Data Pipeline) · Suyash (Physics Modeling) · Bhavya (Dashboard &amp; Integration)
 </div>
 """, unsafe_allow_html=True)

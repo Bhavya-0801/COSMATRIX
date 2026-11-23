@@ -1,5 +1,5 @@
 """
-DARKVERSE — Rotation Analysis (Person 2)
+COSMATRIX — Rotation Analysis (Suyash)
 Baryonic velocity, residuals, percentage difference.
 """
 import pandas as pd

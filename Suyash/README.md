@@ -1,7 +1,7 @@
-# 🌌 DARKVERSE
+# 🌌 COSMATRIX
 ### An Intelligent Dark Matter & Galactic Behaviour Analytics Platform
 
-DARKVERSE is a Python-based astronomical data analysis project designed to study galaxy rotational behaviour, analyze observed and baryonic velocities, estimate mass distributions, perform statistical analysis, and identify unusual rotational patterns that may indicate additional gravitational contributions beyond visible matter.
+COSMATRIX is a Python-based astronomical data analysis project designed to study galaxy rotational behaviour, analyze observed and baryonic velocities, estimate mass distributions, perform statistical analysis, and identify unusual rotational patterns that may indicate additional gravitational contributions beyond visible matter.
 
 The project combines physics-based calculations, data analysis, statistical methods, and anomaly detection to investigate galactic dynamics.
 
@@ -122,7 +122,7 @@ The dataset includes:
 
 ## 🔬 Scientific Methodology
 
-DARKVERSE calculates the baryonic velocity using the gas, disk, and bulge contributions:
+COSMATRIX calculates the baryonic velocity using the gas, disk, and bulge contributions:
 
 \[
 V_{bar}=\sqrt{V_{gas}^{2}+V_{disk}^{2}+V_{bulge}^{2}}
@@ -155,13 +155,13 @@ These calculations help investigate discrepancies between observed rotational be
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/DARKVERSE.git
+git clone https://github.com/YOUR-USERNAME/COSMATRIX.git
 ```
 
 Navigate into the project:
 
 ```bash
-cd DARKVERSE
+cd COSMATRIX
 ```
 
 Install dependencies:
@@ -209,7 +209,7 @@ The processed data can be visualized using Matplotlib to generate:
 
 ## 🧠 Anomaly Detection
 
-DARKVERSE uses statistical methods to identify unusual data points.
+COSMATRIX uses statistical methods to identify unusual data points.
 
 ### Z-score
 
@@ -253,8 +253,8 @@ Developed as a collaborative academic project focused on astronomy, data science
 
 ## 📜 Disclaimer
 
-DARKVERSE is an educational and research-oriented analytical project. It investigates rotational discrepancies in galaxy data and does not directly detect or confirm dark matter.
+COSMATRIX is an educational and research-oriented analytical project. It investigates rotational discrepancies in galaxy data and does not directly detect or confirm dark matter.
 
 ---
 
-**DARKVERSE — Exploring the hidden dynamics of the universe.** 🌌
+**COSMATRIX — Exploring the hidden dynamics of the universe.** 🌌

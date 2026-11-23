@@ -1,5 +1,5 @@
 """
-DARKVERSE — Physics Model (Person 2)
+COSMATRIX — Physics Model (Suyash)
 Fundamental physics calculations and unit conversions.
 """
 import numpy as np

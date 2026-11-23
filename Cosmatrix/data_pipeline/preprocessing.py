@@ -1,5 +1,5 @@
 """
-DARKVERSE — Data Pipeline: Preprocessing (Person 1)
+COSMATRIX — Data Pipeline: Preprocessing (Purva)
 Cleans and validates raw SPARC rotation-curve data files.
 """
 import pandas as pd

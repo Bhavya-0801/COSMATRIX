@@ -1,5 +1,5 @@
 """
-DARKVERSE — Statistical Analysis (Person 2)
+COSMATRIX — Statistical Analysis (Suyash)
 Descriptive stats, correlation, velocity residual metrics.
 """
 import numpy as np

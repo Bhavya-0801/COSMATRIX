@@ -1,5 +1,5 @@
 """
-DARKVERSE — Data Pipeline: Data Loader (Person 1)
+COSMATRIX — Data Pipeline: Data Loader (Purva)
 Loads processed galaxy CSVs and metadata.
 """
 from pathlib import Path

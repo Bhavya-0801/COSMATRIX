@@ -1,5 +1,5 @@
 """
-DARKVERSE — Anomaly Detection (Person 2)
+COSMATRIX — Anomaly Detection (Suyash)
 Z-score and IQR-based anomaly detection on velocity residuals.
 """
 import pandas as pd

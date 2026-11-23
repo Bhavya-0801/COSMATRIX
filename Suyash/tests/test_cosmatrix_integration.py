@@ -25,7 +25,7 @@ from analysis.anomaly_detection import analyze_anomalies
 def main():
 
     print("=" * 60)
-    print("         DARKVERSE - INTEGRATION TEST")
+    print("         COSMATRIX - INTEGRATION TEST")
     print("=" * 60)
 
     # 1. Load dataset
@@ -90,7 +90,7 @@ def main():
 
     # Final result
     print("\n" + "=" * 60)
-    print("DARKVERSE INTEGRATION TEST COMPLETED")
+    print("COSMATRIX INTEGRATION TEST COMPLETED")
     print("=" * 60)
 
 

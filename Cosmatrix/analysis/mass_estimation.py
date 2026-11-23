@@ -1,5 +1,5 @@
 """
-DARKVERSE — Mass Estimation (Person 2)
+COSMATRIX — Mass Estimation (Suyash)
 Total, baryonic, and dark matter proxy mass calculations.
 """
 import pandas as pd

@@ -12,7 +12,7 @@ from analysis import create_metadata_summary, plot_galaxy_distance_distribution,
 
 
 def main():
-    print("\n========== DARKVERSE DATA PIPELINE ==========")
+    print("\n========== COSMATRIX DATA PIPELINE ==========")
 
     print("\n[1/5] Processing raw rotation-curve files...")
     process_all_galaxies()

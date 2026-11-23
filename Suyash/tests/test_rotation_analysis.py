@@ -25,7 +25,7 @@ df = calculate_rotation_curves(df)
 df = estimate_galaxy_mass(df)
 
 # Display results
-print("\nDARKVERSE - Mass Estimation")
+print("\nCOSMATRIX - Mass Estimation")
 
 print(df[[
     "Galaxy",

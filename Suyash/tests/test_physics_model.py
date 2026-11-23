@@ -18,7 +18,7 @@ from analysis.physics_model import (
 )
 
 
-print("===== DARKVERSE PHYSICS TESTING =====\n")
+print("===== COSMATRIX PHYSICS TESTING =====\n")
 
 
 # TEST 1: Distance Conversion

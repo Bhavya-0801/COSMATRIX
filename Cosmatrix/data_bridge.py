@@ -1,9 +1,9 @@
 """
-DARKVERSE — Data Bridge (Person 3)
-Converts Person 1's SPARC schema → Person 2's analysis schema.
+COSMATRIX — Data Bridge (Bhavya)
+Converts Purva's SPARC schema → Suyash's analysis schema.
 
-Person 1 columns : Rad, Vobs, errV, Vgas, Vdisk, Vbul, SBdisk, SBbul
-Person 2 columns : Galaxy, Radius_kpc, V_obs_km_s, V_gas_km_s, V_disk_km_s, V_bulge_km_s
+Purva columns : Rad, Vobs, errV, Vgas, Vdisk, Vbul, SBdisk, SBbul
+Suyash columns : Galaxy, Radius_kpc, V_obs_km_s, V_gas_km_s, V_disk_km_s, V_bulge_km_s
 """
 from pathlib import Path
 import pandas as pd
