@@ -5,7 +5,7 @@ Contributors:
   - Suyash: Kinematic & Physics-based Mathematical Modeling Modules
   - Bhavya: Unified Data Bridge & Interactive Streamlit Analytics Dashboard
 
-Design Theme: Deep Cosmic Obsidian (#0A0D14) & Celestial Starlight (Electric Cyan #38BDF8, Nebula Violet #A78BFA)
+Theme: Animated Deep Space & Cosmic Galaxy Atmosphere with High-Precision Scientific Glass UI
 """
 
 import sys
@@ -55,27 +55,102 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# MODERN CELESTIAL OBSIDIAN THEME
-# High-contrast, sleek astrophysics aesthetic with luminous accents
+# ANIMATED GALAXY & CELESTIAL OBSERVATORY UI
+# Pure CSS 60FPS Parallax Starfields, Nebula Gas Vortex & Glass HUD Panels
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-/* Base Canvas: Deep Space Obsidian (#0A0D14) */
+/* ───────────────────────── GALAXY BACKGROUND SYSTEM ───────────────────────── */
 .stApp {
-    background-color: #0A0D14 !important;
-    background-image: 
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 90% 90%, rgba(167, 139, 250, 0.06) 0%, transparent 60%),
-        radial-gradient(circle at 10% 40%, rgba(30, 41, 59, 0.4) 0%, transparent 50%) !important;
-    background-attachment: fixed !important;
-    color: #F8FAFC !important;
+    background-color: #05070B !important;
+    color: #F1F5F9 !important;
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
 }
 
-/* Sidebar: Refined Midnight Void (#07090E) */
+/* Fixed Multi-Layer Cosmic Canvas */
+.stApp::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: 
+        radial-gradient(circle at 75% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 20% 75%, rgba(139, 92, 246, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 85% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+    animation: cosmicNebulaDrift 24s ease-in-out infinite alternate;
+}
+
+.stApp::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 0;
+    background-image: 
+        radial-gradient(1px 1px at 40px 60px, rgba(255, 255, 255, 0.95), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 140px 190px, rgba(248, 250, 252, 0.85), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 280px 80px, rgba(56, 189, 248, 0.9), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 320px 300px, rgba(167, 139, 250, 0.8), rgba(0,0,0,0)),
+        radial-gradient(1.2px 1.2px at 480px 220px, rgba(255, 255, 255, 0.9), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 620px 140px, rgba(255, 255, 255, 0.75), rgba(0,0,0,0)),
+        radial-gradient(1.8px 1.8px at 740px 380px, rgba(56, 189, 248, 0.85), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 890px 260px, rgba(255, 255, 255, 0.7), rgba(0,0,0,0)),
+        radial-gradient(2.2px 2.2px at 980px 120px, rgba(248, 250, 252, 0.9), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 1120px 420px, rgba(167, 139, 250, 0.75), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 1260px 180px, rgba(255, 255, 255, 0.8), rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 600px 600px;
+    animation: galaxyVortexRotate 120s linear infinite;
+    opacity: 0.85;
+}
+
+/* Cosmic Nebula & Vortex Keyframes */
+@keyframes cosmicNebulaDrift {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.08) translate(-15px, 20px);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.03) translate(20px, -15px);
+        opacity: 0.85;
+    }
+}
+
+@keyframes galaxyVortexRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Ensure app content stays in foreground above space layers */
+.main, header, [data-testid="stSidebar"], .stApp > div {
+    position: relative;
+    z-index: 1;
+}
+
+/* ───────────────────────── MODERN OBSERVATORY HUD UI ───────────────────────── */
+
+/* Sidebar: Deep Obsidian Glass */
 [data-testid="stSidebar"] {
-    background-color: #07090E !important;
-    border-right: 1px solid #171E2E !important;
+    background: rgba(5, 7, 11, 0.85) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
@@ -96,45 +171,23 @@ p, span, div {
     color: #94A3B8;
 }
 
-/* Cosmic Pill Tag */
-.cosmic-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    border-radius: 9999px;
-    padding: 5px 14px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #38BDF8;
-    background-color: rgba(56, 189, 248, 0.08);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-}
-
-.cosmic-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #38BDF8;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #38BDF8;
-}
-
-/* Metric Tiles: Elevated Frosted Obsidian (#10141E) */
+/* Metric Cards: Translucent Observatory HUD Tiles */
 [data-testid="metric-container"] {
-    background-color: #10141E !important;
-    border: 1px solid #1E2638 !important;
-    border-radius: 10px !important;
-    padding: 14px 18px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease !important;
+    background: rgba(12, 16, 26, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: 1px solid rgba(56, 189, 248, 0.4) !important;
+    border-radius: 12px !important;
+    padding: 16px 20px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 [data-testid="metric-container"]:hover {
-    transform: translateY(-2px);
-    border-color: rgba(56, 189, 248, 0.45) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 12px rgba(56, 189, 248, 0.1) !important;
+    transform: translateY(-3px);
+    background: rgba(16, 22, 36, 0.8) !important;
+    border-color: rgba(56, 189, 248, 0.6) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15) !important;
 }
 
 [data-testid="metric-container"] [data-testid="stMetricLabel"] {
@@ -147,116 +200,122 @@ p, span, div {
 
 [data-testid="metric-container"] [data-testid="stMetricValue"] {
     color: #F8FAFC !important;
-    font-size: 1.65rem !important;
+    font-size: 1.7rem !important;
     font-weight: 700 !important;
     letter-spacing: -0.02em !important;
 }
 
-/* Navigation Tabs: Modern Segmented Dock */
+/* Navigation Segment: Sleek Observatory Dock */
 .stTabs [data-baseweb="tab-list"] {
-    background-color: #0E121B !important;
-    border: 1px solid #1A2130 !important;
-    border-radius: 10px !important;
-    padding: 4px !important;
-    gap: 3px !important;
+    background: rgba(10, 14, 23, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 5px !important;
+    gap: 4px !important;
 }
 
 .stTabs [data-baseweb="tab"] {
     color: #94A3B8 !important;
     background-color: transparent !important;
     border: none !important;
-    border-radius: 7px !important;
-    padding: 7px 16px !important;
+    border-radius: 8px !important;
+    padding: 8px 18px !important;
     font-size: 0.88rem !important;
     font-weight: 500 !important;
-    transition: all 0.18s ease !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .stTabs [data-baseweb="tab"]:hover {
     color: #F8FAFC !important;
-    background-color: #161D2B !important;
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
 .stTabs [aria-selected="true"] {
-    background-color: #1E273A !important;
+    background: rgba(30, 41, 59, 0.7) !important;
     color: #38BDF8 !important;
     font-weight: 600 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(56, 189, 248, 0.3) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.15) !important;
 }
 
-/* Action Buttons: Electric Cyan Accent */
+/* Interactive Buttons: Glowing Starlight Pills */
 .stButton > button {
-    background-color: #38BDF8 !important;
-    color: #0A0D14 !important;
-    border: 1px solid #38BDF8 !important;
-    border-radius: 8px !important;
-    padding: 7px 20px !important;
+    background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(56, 189, 248, 0.5) !important;
+    border-radius: 9999px !important;
+    padding: 8px 24px !important;
     font-weight: 600 !important;
     letter-spacing: -0.01em !important;
-    box-shadow: 0 2px 10px rgba(56, 189, 248, 0.25) !important;
-    transition: all 0.18s ease !important;
+    box-shadow: 0 4px 16px rgba(2, 132, 199, 0.3) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .stButton > button:hover {
-    background-color: #7DD3FC !important;
-    border-color: #7DD3FC !important;
-    color: #07090E !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.4) !important;
+    background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%) !important;
+    border-color: #38BDF8 !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(56, 189, 248, 0.5) !important;
 }
 
 .stButton > button:active {
     transform: translateY(0);
 }
 
-/* Selectbox & Dropdown Inputs */
+/* Dropdowns & Selectboxes */
 div[data-baseweb="select"] > div {
-    background-color: #10141E !important;
-    border: 1px solid #1E2638 !important;
-    border-radius: 8px !important;
+    background: rgba(12, 16, 26, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px !important;
     color: #F8FAFC !important;
-    transition: border-color 0.2s ease !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 div[data-baseweb="select"] > div:hover,
 div[data-baseweb="select"] > div:focus-within {
     border-color: #38BDF8 !important;
-    box-shadow: 0 0 0 1px #38BDF8 !important;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.25) !important;
 }
 
 /* Data Table Surface */
 div[data-testid="stDataFrame"] {
-    background-color: #10141E !important;
-    border: 1px solid #1E2638 !important;
-    border-radius: 10px !important;
+    background: rgba(12, 16, 26, 0.6) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
 }
 
 /* Dividers */
 hr {
     border: 0 !important;
     height: 1px !important;
-    background-color: #171E2E !important;
-    margin: 22px 0 !important;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.25), transparent) !important;
+    margin: 24px 0 !important;
 }
 
-/* Informational Cards & Alerts */
+/* Alerts / Expanders */
 .stAlert {
-    background-color: #10141E !important;
-    border: 1px solid #1E2638 !important;
+    background: rgba(12, 16, 26, 0.7) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     color: #F8FAFC !important;
-    border-radius: 10px !important;
+    border-radius: 12px !important;
 }
 
 [data-testid="stExpander"] {
-    background-color: #10141E !important;
-    border: 1px solid #1E2638 !important;
-    border-radius: 10px !important;
+    background: rgba(12, 16, 26, 0.65) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SCIENTIFIC PLOT PALETTE: Nature Astronomy Level Contrast
+# SCIENTIFIC PLOT PALETTE: Deep Space High-Resolution Spectrum
 # ─────────────────────────────────────────────────────────────────────────────
 COLORS = dict(
     obs="#38BDF8",        # Electric Cyan (Observed rotational velocity)
@@ -269,20 +328,20 @@ COLORS = dict(
 )
 
 def _celestial_theme(fig, axes):
-    """Styles matplotlib plots with Deep Space Navy background and refined midnight grid."""
-    fig.patch.set_facecolor("#0A0D14")
+    """Styles matplotlib plots with Deep Space Obsidian backdrop and clean telemetry grid."""
+    fig.patch.set_facecolor("#080B12")
     for ax in (axes if hasattr(axes, "__iter__") else [axes]):
-        ax.set_facecolor("#0F131D")
+        ax.set_facecolor("#0C101A")
         ax.tick_params(colors="#94A3B8", labelsize=9)
         ax.xaxis.label.set_color("#CBD5E1")
         ax.yaxis.label.set_color("#CBD5E1")
         ax.title.set_color("#F8FAFC")
         for s in ax.spines.values():
-            s.set_edgecolor("#1E2536")
+            s.set_edgecolor("#1E2638")
             s.set_linewidth(1.0)
-        ax.grid(True, color="#1E2536", alpha=0.55, linestyle="--", linewidth=0.7)
+        ax.grid(True, color="#1E2638", alpha=0.6, linestyle="--", linewidth=0.7)
 
-LEG = dict(facecolor="#0F131D", edgecolor="#1E2536", labelcolor="#F8FAFC")
+LEG = dict(facecolor="#0C101A", edgecolor="#1E2638", labelcolor="#F8FAFC")
 
 @st.cache_data
 def _galaxies():
@@ -328,12 +387,16 @@ glist = _galaxies()
 meta = _meta()
 
 with st.sidebar:
-    st.markdown('<div class="cosmic-badge"><span class="cosmic-dot"></span> COSMATRIX PLATFORM</div>', unsafe_allow_html=True)
-    st.markdown("## COSMATRIX")
-    st.caption("Galactic Dynamics & Dark Matter Analytics")
+    st.markdown("""
+    <div style="padding: 6px 0 10px;">
+        <span style="font-size: 0.72rem; font-weight: 700; color: #38BDF8; letter-spacing: 0.1em; text-transform: uppercase;">OBSERVATORY CONTROL</span>
+        <h2 style="font-size: 1.6rem; margin: 4px 0 0; color: #FFFFFF;">COSMATRIX</h2>
+        <span style="font-size: 0.8rem; color: #64748B;">Galactic Dynamics Platform</span>
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("---")
     st.markdown(f"**Archive:** {len(glist)} SPARC Galaxies")
-    st.markdown("**Photometry Catalog:** Lelli et al. 2016")
+    st.markdown("**Catalog:** Lelli et al. 2016")
     st.markdown("---")
 
     selected_galaxy = st.selectbox(
@@ -367,25 +430,27 @@ with st.sidebar:
     )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# EDITORIAL CELESTIAL HEADER
+# EDITORIAL OBSERVATORY HEADER
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
-<div style='padding: 10px 0 18px;'>
-    <div class="cosmic-badge"><span class="cosmic-dot"></span> SPARC ASTRONOMICAL SURVEY • EST. 2016</div>
-    <h1 style='font-size: 2.8rem; margin: 4px 0 8px; font-weight: 800; color: #F8FAFC; line-height: 1.15; letter-spacing: -0.03em;'>
+<div style='padding: 8px 0 18px;'>
+    <div style="font-size: 0.78rem; font-weight: 700; color: #38BDF8; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;">
+        SPARC OBSERVATIONAL ASTROPHYSICS ARCHIVE
+    </div>
+    <h1 style='font-size: 3.2rem; margin: 2px 0 10px; font-weight: 800; color: #F8FAFC; line-height: 1.1; letter-spacing: -0.035em;'>
         COSMATRIX
     </h1>
-    <p style='color: #94A3B8; font-size: 1.15rem; font-weight: 400; margin: 0 0 16px; max-width: 820px;'>
-        An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform exploring gravitational anomalies across 175 precision SPARC rotation curves.
+    <p style='color: #94A3B8; font-size: 1.15rem; font-weight: 400; margin: 0 0 14px; max-width: 820px; line-height: 1.6;'>
+        An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform uncovering non-baryonic gravitational signatures across 175 precision SPARC rotation curves.
     </p>
-    <div style="display: flex; gap: 20px; color: #64748B; font-size: 0.85rem; font-weight: 600; padding: 2px 0;">
-        <span><strong style="color: #38BDF8;">175</strong> SPARC GALAXIES</span>
+    <div style="display: flex; gap: 20px; color: #64748B; font-size: 0.85rem; font-weight: 600; padding: 4px 0;">
+        <span><strong style="color: #38BDF8;">175</strong> GALAXIES</span>
         <span>•</span>
         <span><strong style="color: #A78BFA;">3.6μm</strong> SPITZER PHOTOMETRY</span>
         <span>•</span>
         <span><strong style="color: #34D399;">5</strong> ANALYTICS ENGINES</span>
         <span>•</span>
-        <span><strong style="color: #F8FAFC;">100%</strong> INTEGRATED DATA</span>
+        <span><strong style="color: #F8FAFC;">100%</strong> INTEGRATED PIPELINE</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -394,7 +459,7 @@ st.markdown("---")
 # ── Overview Metrics ──────────────────────────────────────────────────────────
 c1, c2, c3, c4, c5 = st.columns(5)
 c1.metric("Catalog Galaxies", len(glist))
-if not meta.empty and "D" in meta_df.columns if 'meta_df' in locals() else (not meta.empty and "D" in meta.columns):
+if not meta.empty and "D" in meta.columns:
     avg_dist = pd.to_numeric(meta["D"], errors="coerce").mean()
     c2.metric("Mean Distance", f"{avg_dist:.1f} Mpc")
 else:
@@ -641,25 +706,6 @@ with tab2:
             "Outer DM Dominance",
             f"{dm_v/last['Total_Mass_Solar']*100:.1f}%" if pd.notna(dm_v) and dm_v else "0.0%",
         )
-
-        with st.expander("Inspect Mass Model Quantities"):
-            cols = [
-                "Radius_kpc",
-                "V_obs_km_s",
-                "V_bar_km_s",
-                "Total_Mass_Solar",
-                "Baryonic_Mass_Solar",
-                "Additional_Mass_Solar",
-            ]
-            st.dataframe(
-                df[cols]
-                .style.format(
-                    "{:.3e}",
-                    subset=["Total_Mass_Solar", "Baryonic_Mass_Solar", "Additional_Mass_Solar"],
-                )
-                .format("{:.3f}", subset=["Radius_kpc", "V_obs_km_s", "V_bar_km_s"]),
-                use_container_width=True,
-            )
     except Exception as e:
         st.error(f"Error computing mass estimates: {e}")
 
@@ -711,7 +757,7 @@ with tab3:
             [COLORS["obs"], COLORS["bar"], COLORS["dark"]],
             ["V_obs (km/s)", "V_bar (km/s)", "Residual ΔV (km/s)"],
         ):
-            ax_.hist(df[col_].dropna(), bins=14, color=clr_, alpha=0.85, edgecolor="#0A0D14")
+            ax_.hist(df[col_].dropna(), bins=14, color=clr_, alpha=0.85, edgecolor="#080B12")
             ax_.axvline(df[col_].mean(), color="#F8FAFC", ls="--", lw=1.2, label="Mean")
             ax_.set_xlabel(lbl_)
             ax_.set_ylabel("Frequency")
@@ -904,7 +950,7 @@ with tab5:
                 names_.append(g)
                 fracs_.append(f)
                 clrs_.append(cohort_palette[i % len(cohort_palette)])
-            bars = ax4.barh(names_, fracs_, color=clrs_, alpha=0.9, edgecolor="#0A0D14")
+            bars = ax4.barh(names_, fracs_, color=clrs_, alpha=0.9, edgecolor="#080B12")
             ax4.set_xlabel("Outer Dark Matter Ratio (%)")
             ax4.set_title("Peripheral Halo Dominance Ratio")
             ax4.set_xlim(0, 100)
@@ -960,19 +1006,19 @@ with tab6:
         fig, axes = plt.subplots(2, 2, figsize=(14, 9))
         _celestial_theme(fig, axes.flatten())
 
-        d.hist(ax=axes[0, 0], bins=24, color=COLORS["obs"], edgecolor="#0A0D14", alpha=0.9)
+        d.hist(ax=axes[0, 0], bins=24, color=COLORS["obs"], edgecolor="#080B12", alpha=0.9)
         axes[0, 0].set_xlabel("Distance (Mpc)")
         axes[0, 0].set_ylabel("Galaxy Count")
         axes[0, 0].set_title("Distance Distribution")
 
         vf = pd.to_numeric(meta["Vflat"], errors="coerce").replace(0, np.nan).dropna()
-        vf.hist(ax=axes[0, 1], bins=24, color=COLORS["bar"], edgecolor="#0A0D14", alpha=0.9)
+        vf.hist(ax=axes[0, 1], bins=24, color=COLORS["bar"], edgecolor="#080B12", alpha=0.9)
         axes[0, 1].set_xlabel("Flat Rotation Velocity (km/s)")
         axes[0, 1].set_ylabel("Galaxy Count")
         axes[0, 1].set_title("V_flat Characteristic Velocity Distribution")
 
         t_ = pd.to_numeric(meta["T"], errors="coerce").dropna().value_counts().sort_index()
-        axes[1, 0].bar(t_.index, t_.values, color=COLORS["gas"], alpha=0.9, edgecolor="#0A0D14")
+        axes[1, 0].bar(t_.index, t_.values, color=COLORS["gas"], alpha=0.9, edgecolor="#080B12")
         axes[1, 0].set_xlabel("Hubble Morphological Stage (T)")
         axes[1, 0].set_ylabel("Galaxy Count")
         axes[1, 0].set_title("Morphological Classification")
@@ -989,7 +1035,7 @@ with tab6:
             cmap="viridis",
             s=34,
             alpha=0.9,
-            edgecolors="#0A0D14",
+            edgecolors="#080B12",
         )
         cbar = plt.colorbar(sc, ax=axes[1, 1])
         cbar.set_label("Hubble Type (T)", color="#94A3B8")
@@ -1012,7 +1058,7 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #64748B; font-size: 0.85rem; padding: 14px 0;'>
     <b>COSMATRIX</b> — An Intelligent Dark Matter &amp; Galactic Behaviour Analytics Platform<br>
-    Observational Data: SPARC (Lelli et al. 2016) • Theme: Deep Cosmic Obsidian &amp; Celestial Starlight<br>
+    Observational Data: SPARC (Lelli et al. 2016) • Theme: Animated Galactic Vortex &amp; Cosmic Glass HUD<br>
     Purva (Data Pipeline) • Suyash (Physics Modeling) • Bhavya (Dashboard &amp; Integration)
 </div>
 """, unsafe_allow_html=True)
