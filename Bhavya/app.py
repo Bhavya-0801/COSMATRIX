@@ -1,13 +1,3 @@
-"""
-COSMATRIX — An Intelligent Dark Matter & Galactic Behaviour Analytics Platform
-Contributors:
-  - Purva: SPARC Data Collection, Ingestion & Preprocessing Pipeline
-  - Suyash: Kinematic & Physics-based Mathematical Modeling Modules
-  - Bhavya: Unified Data Bridge & Interactive Streamlit Analytics Dashboard
-
-Theme: Animated Deep Space & Cosmic Galaxy Atmosphere with High-Precision Scientific Glass UI
-"""
-
 import sys
 from pathlib import Path
 
